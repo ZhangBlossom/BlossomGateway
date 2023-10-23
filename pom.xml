@@ -19,4 +19,13 @@
         <module>BlossomGateway-Config-Center</module>
         <module>BlossomGateway-Register-Center</module>
     </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>4.5.11</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
