@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="BlossomGateway-Common" />
+        <module name="BlossomGateway-HttpServer" />
+        <module name="BlossomGateway-Dubbo" />
+        <module name="BlossomGateway-Register-Center" />
+        <module name="BlossomGateway-Core" />
+        <module name="BlossomGateway-Client" />
+        <module name="BlossomGateway-Config-Center" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
