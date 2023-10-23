@@ -6,6 +6,7 @@ import blossom.gateway.core.rule.Rule;
 import cn.hutool.core.lang.Assert;
 import io.netty.channel.ChannelHandlerContext;
 
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -29,5 +30,8 @@ public class Test {
         // new GatewayContext.GatewayContextBuilder().setNettyContext(null)
         //         .setRule(new Rule())
         //        .build();
+
+        Properties properties = System.getProperties();
+        System.out.println(properties);
     }
 }
