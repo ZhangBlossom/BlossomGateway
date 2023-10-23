@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>blossom.project</groupId>
+    <artifactId>BlossomGateway</artifactId>
+    <version>1.0</version>
+    <!-- 确保这里是 "pom" -->
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>BlossomGateway-Core</module>
+        <module>BlossomGateway-Common</module>
+        <module>BlossomGateway-Client</module>
+        <module>BlossomGateway-Dubbo</module>
+        <module>BlossomGateway-HttpServer</module>
+        <module>BlossomGateway-Config-Center</module>
+        <module>BlossomGateway-Register-Center</module>
+    </modules>
+</project>
