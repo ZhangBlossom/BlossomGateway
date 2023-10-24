@@ -5,11 +5,15 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 /**
- * @PROJECT_NAME: api-gateway
- * @DESCRIPTION: 核心规则类
- * @USER: WuYang
- * @DATE: 2022/12/31 19:00
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
  */
 public class Rule implements Comparable<Rule>, Serializable {
 

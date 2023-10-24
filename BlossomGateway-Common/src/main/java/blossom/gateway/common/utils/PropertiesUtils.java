@@ -3,6 +3,15 @@ package blossom.gateway.common.utils;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
+/**
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
+ */
 public class PropertiesUtils {
 
     public static void properties2Object(final Properties p, final Object object, String prefix) {

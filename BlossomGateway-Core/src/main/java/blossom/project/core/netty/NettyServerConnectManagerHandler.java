@@ -9,6 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
  * 连接管理器，管理连接对生命周期
  */
 @Slf4j

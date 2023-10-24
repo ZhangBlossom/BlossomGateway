@@ -17,11 +17,15 @@ import org.asynchttpclient.RequestBuilder;
 import java.nio.charset.Charset;
 import java.util.*;
 
+
 /**
- * @PROJECT_NAME: api-gateway
- * @DESCRIPTION: 网关请求类
-* @USER: ZhangBlossom
- * @DATE: 2023/10/23/29 21:01
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
  */
 @Slf4j
 public class GatewayRequest implements IGatewayRequest{

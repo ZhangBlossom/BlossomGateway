@@ -10,11 +10,15 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
+
 /**
- * @PROJECT_NAME: api-gateway
- * @DESCRIPTION: 核心上下文基础类
- * @USER: WuYang
- * @DATE: 2022/12/29 20:14
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
  */
 public class BasicContext implements IContext{
 

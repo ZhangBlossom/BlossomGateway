@@ -9,11 +9,15 @@ import io.netty.util.ReferenceCountUtil;
 import lombok.Builder;
 
 
+
 /**
- * @PROJECT_NAME: api-gateway
- * @DESCRIPTION: 网关核心上下文类
- * @USER: ZhangBlossom
- * @DATE: 2023/10/23 20:59
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
  */
 @Builder
 public class GatewayContext extends BasicContext{

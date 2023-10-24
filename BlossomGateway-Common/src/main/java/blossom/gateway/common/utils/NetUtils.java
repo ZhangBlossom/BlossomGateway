@@ -14,11 +14,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
- * @PROJECT_NAME: api-gateway-prepare
- * @DESCRIPTION: 网络工具类
- * @USER: WuYang
- * @DATE: 2022/12/19 23:49
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
  */
 public class NetUtils {
 

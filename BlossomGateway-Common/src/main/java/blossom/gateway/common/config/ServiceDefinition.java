@@ -7,6 +7,15 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
+ */
+/**
  * 资源服务定义类：无论下游是什么样的服务都需要进行注册
  */
 @Builder

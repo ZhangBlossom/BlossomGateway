@@ -7,6 +7,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
+ * @author: ZhangBlossom
+ * @date: 2023/10/23 19:57
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ * Test类
+ *
  * 核心上下文接口定义
  */
 public interface IContext {
