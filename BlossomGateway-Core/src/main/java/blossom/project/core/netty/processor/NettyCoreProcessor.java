@@ -46,6 +46,7 @@ public class NettyCoreProcessor implements NettyProcessor {
         } catch (BaseException e) {
             log.error("process error {} {}", e.getCode().getCode(), e.getCode().getMessage());
             FullHttpResponse httpResponse = ResponseHelper.getHttpResponse(e.getCode());
+            //回写数据并且释放资源
             doWriteAndRelease(ctx, request, httpResponse);
         } catch (Throwable t) {
             log.error("process unkown error", t);
@@ -66,7 +67,7 @@ public class NettyCoreProcessor implements NettyProcessor {
         CompletableFuture<Response> future = AsyncHttpHelper.getInstance().executeRequest(request);
 
         boolean whenComplete = ConfigLoader.getConfig().isWhenComplete();
-
+        //判断是否是单异步
         if (whenComplete) {
             future.whenComplete((response, throwable) -> {
                complete(request, response, throwable, gatewayContext);
@@ -85,6 +86,7 @@ public class NettyCoreProcessor implements NettyProcessor {
         gatewayContext.releaseRequest();
 
         try {
+            //异常信息处理
             if (Objects.nonNull(throwable)) {
                 String url = request.getUrl();
                 if (throwable instanceof TimeoutException) {
@@ -96,6 +98,7 @@ public class NettyCoreProcessor implements NettyProcessor {
                             url, ResponseCode.HTTP_RESPONSE_ERROR));
                 }
             } else {
+                //没有异常则正常响应结果
                 gatewayContext.setResponse(GatewayResponse.buildGatewayResponse(response));
             }
         } catch (Throwable t) {

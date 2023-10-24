@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO" schema="Log4J-V2.0.xsd" monitorInterval="600">
+
+    <!--日志级别：TRACE < DEBUG < INFO < WARN < ERROR < FATAL-->
+    <Properties>
+        <!-- 	配置日志文件输出目录,此处为项目根目录下的logs文件夹 	MDC%X   %X{logInfo} %l -->
+        <Property name="LOG_HOME">logs</Property>
+        <property name="FILE_NAME">gateway-core</property>
+        <property name="traceLayout">%m%n</property>
+        <property name="patternLayout">[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZ}] [%level{length=5}] [%thread-%tid] [%logger] [%X{hostName}] [%X{ip}] [%X{applicationName}] [%X{traceId}] [%X{spanId}] [%F,%L,%C,%M] [%m] ## '%ex'%n</property>
+    	<!--
+    	<property name="jsonLayout">{"time":"%d{yyyy-MM-dd HH:mm:ss.SSS}","level":"%level{length=5}","thread-tid":"%thread-%tid","class":"%logger","hostName":"%X{hostName}","ip":"%X{ip}","applicationName":"%X{applicationName}","traceId":"%X{traceId}","spanId":"%X{spanId}","location":"%F,%L,%C,%M","messageInfo":"%m","throwable":"%ex"}%n</property>
+    	 --> 
+    </Properties>
+
+	<Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${patternLayout}"/>
+        </Console>	
+   
+	    <RollingRandomAccessFile name="RandomAccessFile" fileName="${LOG_HOME}/app-${FILE_NAME}.log" filePattern="${LOG_HOME}/app-${FILE_NAME}-%d{yyyy-MM-dd}-%i.log" >
+	      <PatternLayout pattern="${patternLayout}" />
+          <Policies>
+              <TimeBasedTriggeringPolicy interval="1"/>
+              <SizeBasedTriggeringPolicy size="500MB"/>
+          </Policies>
+          <DefaultRolloverStrategy max="20"/>	      
+	    </RollingRandomAccessFile>
+ 
+		<Async name="Async" shutdownTimeout="10000">
+            <Appender-Ref ref="CONSOLE"/>
+            <Appender-Ref ref="RandomAccessFile"/>
+        </Async>
+	  </Appenders>
+	  
+	<Loggers>
+	    <Logger name="com.imooc.gateway.core.*" level="info" includeLocation="true">
+	      <AppenderRef ref="RandomAccessFile"/>
+	    </Logger>
+   
+        <Root level="debug">
+            <Appender-Ref ref="CONSOLE"/>
+            <!--  
+            <Appender-Ref ref="RandomAccessFile"/>
+            -->
+        </Root>         
+	</Loggers>
+</Configuration>

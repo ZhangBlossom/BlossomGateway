@@ -6,8 +6,9 @@ import blossom.project.core.request.GatewayRequest;
 import blossom.project.core.response.GatewayResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.ReferenceCountUtil;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -19,7 +20,6 @@ import lombok.Builder;
  * @github: https://github.com/ZhangBlossom
  * Test类
  */
-@Builder
 public class GatewayContext extends BasicContext{
 
     private GatewayRequest request;

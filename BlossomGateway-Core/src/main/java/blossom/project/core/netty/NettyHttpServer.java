@@ -16,17 +16,27 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.util.concurrent.DefaultThreadFactory;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 
 import java.net.InetSocketAddress;
-
+/**
+ * @author: ZhangBlossom
+ * @date: 2023/10/24 19:23
+ * @contact: QQ:4602197553
+ * @contact: WX:qczjhczs0114
+ * @blog: https://blog.csdn.net/Zhangsama1
+ * @github: https://github.com/ZhangBlossom
+ */
 @Slf4j
 public class NettyHttpServer implements LifeCycle {
     private final Config config;
     private final NettyProcessor nettyProcessor;
     private ServerBootstrap serverBootstrap;
     private EventLoopGroup eventLoopGroupBoss;
+
+    @Getter
     private EventLoopGroup eventLoopGroupWoker;
 
 
