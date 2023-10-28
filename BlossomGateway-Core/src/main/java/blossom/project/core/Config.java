@@ -11,11 +11,12 @@ import lombok.Data;
  * @github: https://github.com/ZhangBlossom
  * Test类
  */
+
 @Data
 public class Config {
     private int port = 8888;
 
-    private String appliactionName = "api-gateway";
+    private String applicationName = "api-gateway";
 
     private String registryAddress = "127.0.0.1:8848";
 

@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/BlossomGateway-Register-Center/pom.xml" />
         <option value="$PROJECT_DIR$/BlossomGateway-HttpServer/pom.xml" />
         <option value="$PROJECT_DIR$/BlossomGateway-Dubbo/pom.xml" />
+        <option value="$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Api/pom.xml" />
       </list>
     </option>
   </component>
