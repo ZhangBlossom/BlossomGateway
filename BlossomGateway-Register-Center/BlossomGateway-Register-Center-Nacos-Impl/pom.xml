@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>BlossomGateway-Register-Center-Api-Nacos-Impl</artifactId>
+    <artifactId>BlossomGateway-Register-Center-Nacos-Impl</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>

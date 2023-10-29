@@ -1,6 +1,6 @@
 package blossom.project.core;
 
-import blossom.gateway.common.utils.PropertiesUtils;
+import blossom.project.common.utils.PropertiesUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

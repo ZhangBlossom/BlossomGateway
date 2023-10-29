@@ -1,7 +1,7 @@
 package blossom.project.core.request;
 
-import blossom.gateway.common.constant.BasicConst;
-import blossom.gateway.common.utils.TimeUtil;
+import blossom.project.common.constant.BasicConst;
+import blossom.project.common.utils.TimeUtil;
 import com.google.common.collect.Lists;
 import com.jayway.jsonpath.JsonPath;
 import io.netty.buffer.ByteBuf;

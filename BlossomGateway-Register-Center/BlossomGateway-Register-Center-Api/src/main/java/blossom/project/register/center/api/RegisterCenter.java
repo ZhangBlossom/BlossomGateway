@@ -1,8 +1,8 @@
 package blossom.project.register.center.api;
 
 
-import blossom.gateway.common.config.ServiceDefinition;
-import blossom.gateway.common.config.ServiceInstance;
+import blossom.project.common.config.ServiceDefinition;
+import blossom.project.common.config.ServiceInstance;
 
 /**
  * @author: ZhangBlossom

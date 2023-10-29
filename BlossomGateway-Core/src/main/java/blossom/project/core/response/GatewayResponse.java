@@ -1,7 +1,7 @@
 package blossom.project.core.response;
 
-import blossom.gateway.common.enums.ResponseCode;
-import blossom.gateway.common.utils.JSONUtil;
+import blossom.project.common.enums.ResponseCode;
+import blossom.project.common.utils.JSONUtil;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.netty.handler.codec.http.*;
 import lombok.Data;

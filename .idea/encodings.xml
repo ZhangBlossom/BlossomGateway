@@ -5,6 +5,10 @@
     <file url="file://$PROJECT_DIR$/BlossomGateway-Client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/BlossomGateway-Config-Center-Api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/BlossomGateway-Config-Center-Api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/BlossomGateway-Config-Center-Nacos-Impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/BlossomGateway-Config-Center-Nacos-Impl/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Core/src/main/java" charset="UTF-8" />

@@ -1,12 +1,12 @@
 package blossom.project.core.helper;
 
-import blossom.gateway.common.config.HttpServiceInvoker;
-import blossom.gateway.common.config.Rule;
-import blossom.gateway.common.config.ServiceDefinition;
-import blossom.gateway.common.config.ServiceInvoker;
-import blossom.gateway.common.constant.BasicConst;
-import blossom.gateway.common.constant.GatewayConst;
-import blossom.gateway.common.constant.GatewayProtocol;
+import blossom.project.common.config.HttpServiceInvoker;
+import blossom.project.common.config.Rule;
+import blossom.project.common.config.ServiceDefinition;
+import blossom.project.common.config.ServiceInvoker;
+import blossom.project.common.constant.BasicConst;
+import blossom.project.common.constant.GatewayConst;
+import blossom.project.common.constant.GatewayProtocol;
 import blossom.project.core.context.GatewayContext;
 import blossom.project.core.request.GatewayRequest;
 import io.netty.channel.ChannelHandlerContext;

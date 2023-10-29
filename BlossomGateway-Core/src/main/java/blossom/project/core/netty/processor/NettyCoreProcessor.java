@@ -1,9 +1,9 @@
 package blossom.project.core.netty.processor;
 
-import blossom.gateway.common.enums.ResponseCode;
-import blossom.gateway.common.exception.BaseException;
-import blossom.gateway.common.exception.ConnectException;
-import blossom.gateway.common.exception.ResponseException;
+import blossom.project.common.enums.ResponseCode;
+import blossom.project.common.exception.BaseException;
+import blossom.project.common.exception.ConnectException;
+import blossom.project.common.exception.ResponseException;
 import blossom.project.core.ConfigLoader;
 import blossom.project.core.context.GatewayContext;
 import blossom.project.core.context.HttpRequestWrapper;

@@ -31,6 +31,25 @@
             <artifactId>BlossomGateway-Register-Center-Api</artifactId>
             <version>1.0</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomGateway-Config-Center-Api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomGateway-Config-Center-Nacos-Impl</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomGateway-Register-Center-Nacos-Impl</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>

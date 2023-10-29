@@ -1,6 +1,6 @@
 package blossom.project.core.context;
 
-import blossom.gateway.common.config.Rule;
+import blossom.project.common.config.Rule;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.ArrayList;

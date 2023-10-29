@@ -1,8 +1,8 @@
 package blossom.project.register.center.nacos.impl;
 
-import blossom.gateway.common.config.ServiceDefinition;
-import blossom.gateway.common.config.ServiceInstance;
-import blossom.gateway.common.constant.GatewayConst;
+import blossom.project.common.config.ServiceDefinition;
+import blossom.project.common.config.ServiceInstance;
+import blossom.project.common.constant.GatewayConst;
 import blossom.project.register.center.api.RegisterCenter;
 import blossom.project.register.center.api.RegisterCenterListener;
 import com.alibaba.fastjson.JSON;
@@ -191,7 +191,7 @@ public class NacosRegisterCenter implements RegisterCenter {
         public void onEvent(Event event) {
             //先判断是否是注册中心事件
             if (event instanceof NamingEvent) {
-                log.info("the triggered event info is：{}",JSON.toJSON(event));
+                log.info("the triggered event info is：{}", JSON.toJSON(event));
                 NamingEvent namingEvent = (NamingEvent) event;
                 //获取当前变更的服务名
                 String serviceName = namingEvent.getServiceName();

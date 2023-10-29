@@ -1,6 +1,6 @@
 package blossom.project.core.netty;
 
-import blossom.gateway.common.utils.RemotingHelper;
+import blossom.project.common.utils.RemotingHelper;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;

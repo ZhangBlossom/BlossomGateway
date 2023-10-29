@@ -1,6 +1,6 @@
 package blossom.project.core.netty;
 
-import blossom.gateway.common.utils.RemotingUtil;
+import blossom.project.common.utils.RemotingUtil;
 import blossom.project.core.Config;
 import blossom.project.core.LifeCycle;
 import blossom.project.core.netty.processor.NettyProcessor;

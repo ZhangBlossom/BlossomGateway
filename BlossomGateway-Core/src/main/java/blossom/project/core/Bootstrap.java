@@ -5,11 +5,12 @@ package blossom.project.core;
  *
  */
 
-import blossom.gateway.common.config.DynamicConfigManager;
-import blossom.gateway.common.config.ServiceDefinition;
-import blossom.gateway.common.config.ServiceInstance;
-import blossom.gateway.common.utils.NetUtils;
-import blossom.gateway.common.utils.TimeUtil;
+import blossom.project.common.config.DynamicConfigManager;
+import blossom.project.common.config.ServiceDefinition;
+import blossom.project.common.config.ServiceInstance;
+import blossom.project.common.utils.NetUtils;
+import blossom.project.common.utils.TimeUtil;
+import blossom.project.config.center.api.ConfigCenter;
 import blossom.project.register.center.api.RegisterCenter;
 import blossom.project.register.center.api.RegisterCenterListener;
 import com.alibaba.fastjson.JSON;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
 
-import static blossom.gateway.common.constant.BasicConst.COLON_SEPARATOR;
+import static blossom.project.common.constant.BasicConst.COLON_SEPARATOR;
 
 /**
  * @author: ZhangBlossom
@@ -41,7 +42,18 @@ public class Bootstrap
         System.out.println(config.getPort());
 
         //插件初始化
+
         //配置中心管理器初始化，连接配置中心，监听配置的新增、修改、删除
+        ServiceLoader<ConfigCenter> serviceLoader = ServiceLoader.load(ConfigCenter.class);
+        final ConfigCenter configCenter = serviceLoader.findFirst().orElseThrow(() -> {
+            log.error("not found ConfigCenter impl");
+            return new RuntimeException("not found ConfigCenter impl");
+        });
+        configCenter.init(config.getRegistryAddress(), config.getEnv());
+        configCenter.subscribeRulesChange(rules -> DynamicConfigManager.getInstance()
+                .putAllRule(rules));
+
+
         //启动容器
         Container container = new Container(config);
         container.start();
@@ -63,6 +75,9 @@ public class Bootstrap
             }
         });
     }
+
+
+
 
 
     /**

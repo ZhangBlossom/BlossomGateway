@@ -1,7 +1,7 @@
 package blossom.project.core.helper;
 
-import blossom.gateway.common.constant.BasicConst;
-import blossom.gateway.common.enums.ResponseCode;
+import blossom.project.common.constant.BasicConst;
+import blossom.project.common.enums.ResponseCode;
 import blossom.project.core.context.IContext;
 import blossom.project.core.response.GatewayResponse;
 import io.netty.buffer.ByteBuf;
