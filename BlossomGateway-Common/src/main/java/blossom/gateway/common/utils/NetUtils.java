@@ -152,8 +152,9 @@ public class NetUtils {
                     Matcher matcher = pattern.matcher(ip);
                     if (matcher.matches()) {
                         int idx = matchedIndex(ip, prefix);
-                        if (idx == -1)
+                        if (idx == -1) {
                             continue;
+                        }
                         if (matchedIdx == -1) {
                             matchedIdx = idx;
                             matchedIp = ip;

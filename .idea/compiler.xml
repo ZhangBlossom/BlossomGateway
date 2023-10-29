@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="BlossomGateway-Common" />
         <module name="BlossomGateway-HttpServer" />
+        <module name="BlossomGateway-Register-Center-Nacos-Impl" />
         <module name="BlossomGateway-Dubbo" />
         <module name="BlossomGateway-Register-Center-Api" />
         <module name="BlossomGateway-Register-Center" />

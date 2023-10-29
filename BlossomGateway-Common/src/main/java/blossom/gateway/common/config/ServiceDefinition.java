@@ -69,7 +69,7 @@ public class ServiceDefinition implements Serializable {
 	}
 	
 	public ServiceDefinition(String uniqueId, String serviceId, String version, String protocol, String patternPath,
-                             String envType, boolean enable, Map<String, ServiceInvoker> invokerMap) {
+							 String envType, boolean enable, Map<String, ServiceInvoker> invokerMap) {
 		super();
 		this.uniqueId = uniqueId;
 		this.serviceId = serviceId;

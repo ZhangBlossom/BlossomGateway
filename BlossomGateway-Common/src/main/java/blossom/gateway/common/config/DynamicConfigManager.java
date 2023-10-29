@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 /**
  * 动态服务缓存配置管理类
+ * 这个类可能不太好理解 如果有了解Nacos源码的可能会好理解一点
+ * 推荐在理解这个类的作用之前先查看我的博客
  */
 public class DynamicConfigManager {
 	

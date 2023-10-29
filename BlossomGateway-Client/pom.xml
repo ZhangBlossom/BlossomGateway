@@ -10,10 +10,59 @@
         <version>1.0</version>
     </parent>
     <artifactId>BlossomGateway-Client</artifactId>
-
+    <description>
+        提供给下游服务使用,把下游服务也注册到注册中心,让网关可以感知到,从而转发请求
+    </description>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.3.12.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>2.3.12.RELEASE</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.7.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomGateway-Common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!--   注册中心     -->
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomGateway-Register-Center-Api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>blossom.project</groupId>
+            <artifactId>BlossomGateway-Register-Center-Api-Nacos-Impl</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
 </project>

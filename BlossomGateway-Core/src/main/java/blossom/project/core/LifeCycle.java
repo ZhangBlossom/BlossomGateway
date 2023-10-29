@@ -7,7 +7,7 @@ package blossom.project.core;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
+ * LifeCycle 生命周期
  */
 public interface LifeCycle {
 

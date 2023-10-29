@@ -49,15 +49,35 @@ public class Bootstrap
         //连接注册中心，将注册中心的实例加载到本地
         final RegisterCenter registerCenter = registerAndSubscribe(config);
         //服务优雅关机
+        //进程收到kill信号的时候进行一个注销操作
+        Runtime.getRuntime().addShutdownHook(new Thread(){
 
+            /**
+             * 下线操作
+             */
+            @Override
+            public void run(){
+                registerCenter.deregister(
+                        buildGatewayServiceDefinition(config),
+                        buildGatewayServiceInstance(config));
+            }
+        });
     }
 
+
+    /**
+     * 当前方法用于提供注册和订阅服务信息变更通知
+     * @param config
+     * @return
+     */
     private static RegisterCenter registerAndSubscribe(Config config) {
+        //加载服务提供者  具体这里的作用可以 查看我的博客
         ServiceLoader<RegisterCenter> serviceLoader = ServiceLoader.load(RegisterCenter.class);
         final RegisterCenter registerCenter = serviceLoader.findFirst().orElseThrow(() -> {
             log.error("not found RegisterCenter impl");
             return new RuntimeException("not found RegisterCenter impl");
         });
+        //初始化注册中心信息
         registerCenter.init(config.getRegistryAddress(), config.getEnv());
 
         //构造网关服务定义和服务实例

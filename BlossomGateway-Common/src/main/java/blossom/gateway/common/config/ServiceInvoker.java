@@ -7,9 +7,6 @@ package blossom.gateway.common.config;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
- */
-/**
  * 服务调用的接口模型描述
  */
 public interface ServiceInvoker {
