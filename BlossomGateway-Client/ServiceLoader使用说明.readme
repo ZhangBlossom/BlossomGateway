@@ -1,0 +1,62 @@
+ServiceLoader 是 Java 标准库提供的一个用于加载服务提供者实现类的工具。它通常用于实现服务提供者框架，允许应用程序动态加载和使用不同的服务提供者。以下是 ServiceLoader 的使用方法：
+
+定义服务接口：首先，您需要定义一个服务接口（或抽象类），该接口规定了服务提供者需要实现的方法。这是您的服务的抽象描述。
+
+创建服务提供者实现类：不同的模块或库可以提供服务接口的不同实现，这些实现类需要实现服务接口中定义的方法。
+
+创建配置文件：在项目的 resources 目录下，创建一个名为 META-INF/services/your.interface.name 的配置文件，其中 your.interface.name 是您定义的服务接口的全限定名。例如，如果您的服务接口是 com.example.MyService，则配置文件的名称应该是 META-INF/services/com.example.MyService。
+
+在配置文件中指定服务提供者：在配置文件中，列出提供服务的实现类的全限定名，每行一个。例如：
+
+Copy code
+com.example.MyServiceImpl1
+com.example.MyServiceImpl2
+这告诉 ServiceLoader 哪些类实现了您的服务接口。
+
+使用 ServiceLoader 加载服务：在您的代码中，使用 ServiceLoader.load(YourServiceInterface.class) 来加载服务提供者实现类。这会返回一个 ServiceLoader 对象。
+
+迭代服务提供者：使用 ServiceLoader 对象可以迭代加载的服务提供者实现类，然后实例化它们以使用其功能。
+
+以下是一个示例：
+
+java
+Copy code
+// 定义服务接口
+public interface MyService {
+    void doSomething();
+}
+
+// 创建服务提供者实现类
+public class MyServiceImpl1 implements MyService {
+    @Override
+    public void doSomething() {
+        System.out.println("Service 1 is doing something.");
+    }
+}
+
+public class MyServiceImpl2 implements MyService {
+    @Override
+    public void doSomething() {
+        System.out.println("Service 2 is doing something.");
+    }
+}
+
+// 创建配置文件 META-INF/services/com.example.MyService
+// 在配置文件中指定服务提供者
+// com.example.MyServiceImpl1
+// com.example.MyServiceImpl2
+
+// 使用 ServiceLoader 加载服务
+ServiceLoader<MyService> serviceLoader = ServiceLoader.load(MyService.class);
+
+// 迭代服务提供者
+for (MyService service : serviceLoader) {
+    service.doSomething();
+}
+这将输出：
+
+csharp
+Copy code
+Service 1 is doing something.
+Service 2 is doing something.
+需要注意的是，配置文件必须按照规范放在 META-INF/services 目录下，而且其名称必须与服务接口的全限定名一致。此外，ServiceLoader 在加载服务提供者时会按照配置文件中的顺序加载，因此可以控制服务提供者的加载顺序。如果没有提供配置文件，或者配置文件中没有列出任何服务提供者，ServiceLoader 不会抛出异常，只是返回一个空的迭代器。

@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+blossom.gateway.client.autoconfigure.ApiClientAutoConfiguration
