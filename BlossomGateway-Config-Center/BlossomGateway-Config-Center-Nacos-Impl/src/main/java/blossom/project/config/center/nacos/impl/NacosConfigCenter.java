@@ -28,6 +28,9 @@ import java.util.concurrent.Executor;
 @Slf4j
 public class NacosConfigCenter implements ConfigCenter {
 
+    /**
+     * 需要拉取的服务配置的DATA_ID 要求自定义
+     */
     private static final String DATA_ID = "api-gateway";
 
 

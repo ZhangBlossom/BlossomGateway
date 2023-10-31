@@ -15,7 +15,10 @@ import io.netty.util.ReferenceCountUtil;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
+ * GatewayContext 网关上下文
+ * 也就是包含了请求以及请求响应
+ * 并且包含了一系列的规则
+ *
  */
 public class GatewayContext extends BasicContext{
 
@@ -125,7 +128,7 @@ public class GatewayContext extends BasicContext{
     }
 
     public String getUniqueId(){
-        return request.getUniquedId();
+        return request.getUniqueId();
     }
 
     /**

@@ -25,7 +25,7 @@ import java.util.*;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
+ * 网关请求类
  */
 @Slf4j
 public class GatewayRequest implements IGatewayRequest{
@@ -34,7 +34,7 @@ public class GatewayRequest implements IGatewayRequest{
      * 服务ID
      */
     @Getter
-    private final String uniquedId;
+    private final String uniqueId;
 
     /**
      * 请求进入网关时间
@@ -139,7 +139,6 @@ public class GatewayRequest implements IGatewayRequest{
 
     /**
      * 构造器
-     * @param uniquedId
      * @param charset
      * @param clientIp
      * @param host
@@ -149,8 +148,8 @@ public class GatewayRequest implements IGatewayRequest{
      * @param headers
      * @param fullHttpRequest
      */
-    public GatewayRequest(String uniquedId, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
-        this.uniquedId = uniquedId;
+    public GatewayRequest(String uniqueId, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
+        this.uniqueId = uniqueId;
         this.beginTime = TimeUtil.currentTimeMillis();
         this.charset = charset;
         this.clientIp = clientIp;
@@ -229,23 +228,23 @@ public class GatewayRequest implements IGatewayRequest{
             if(postParameters == null || postParameters.isEmpty()){
                 return null;
             }else{
-              return   postParameters.get(name);
+                return   postParameters.get(name);
             }
         } else if (isJsonPost()){
-           try {
-               return Lists.newArrayList(JsonPath.read(body,name).toString());
-           }catch (Exception e){
-               log.error("JsonPath解析失败，JsonPath:{},Body:{},",name,body,e);
-           }
+            try {
+                return Lists.newArrayList(JsonPath.read(body,name).toString());
+            }catch (Exception e){
+                log.error("JsonPath解析失败，JsonPath:{},Body:{},",name,body,e);
+            }
         }
-      return null;
+        return null;
     }
 
 
 
     @Override
     public void setModifyHost(String modifyHost) {
-       this.modifyHost = modifyHost;
+        this.modifyHost = modifyHost;
     }
 
     @Override
@@ -255,17 +254,17 @@ public class GatewayRequest implements IGatewayRequest{
 
     @Override
     public void setModifyPath(String modifyPath) {
-       this.modifyPath = modifyPath;
+        this.modifyPath = modifyPath;
     }
 
     @Override
     public String getModifyPath() {
-      return modifyPath;
+        return modifyPath;
     }
 
     @Override
     public void addHeader(CharSequence name, String value) {
-       requestBuilder.addHeader(name,value);
+        requestBuilder.addHeader(name,value);
     }
 
     @Override
@@ -280,14 +279,14 @@ public class GatewayRequest implements IGatewayRequest{
 
     @Override
     public void addFormParam(String name, String value) {
-         if(isFormPost()){
+        if(isFormPost()){
             requestBuilder.addFormParam(name,value);
-         }
+        }
     }
 
     @Override
     public void addOrReplaceCookie(org.asynchttpclient.cookie.Cookie cookie) {
-            requestBuilder.addOrReplaceCookie(cookie);
+        requestBuilder.addOrReplaceCookie(cookie);
     }
 
     @Override
@@ -306,15 +305,15 @@ public class GatewayRequest implements IGatewayRequest{
         return requestBuilder.build();
     }
 
-  public  boolean isFormPost(){
+    public  boolean isFormPost(){
         return HttpMethod.POST.equals(method) &&
                 (contentType.startsWith(HttpHeaderValues.FORM_DATA.toString()) ||
                         contentType.startsWith(HttpHeaderValues.APPLICATION_X_WWW_FORM_URLENCODED.toString()));
-  }
+    }
 
-  public  boolean isJsonPost(){
+    public  boolean isJsonPost(){
         return HttpMethod.POST.equals(method) && contentType.startsWith(HttpHeaderValues.APPLICATION_JSON.toString());
-  }
+    }
 
 
 
