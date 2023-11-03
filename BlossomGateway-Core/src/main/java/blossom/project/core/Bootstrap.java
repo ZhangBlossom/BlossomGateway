@@ -31,7 +31,6 @@ import static blossom.project.common.constant.BasicConst.COLON_SEPARATOR;
  * @github: https://github.com/ZhangBlossom
  * Test类
  */
-
 @Slf4j
 public class Bootstrap
 {
@@ -42,7 +41,6 @@ public class Bootstrap
         System.out.println(config.getPort());
 
         //插件初始化
-
         //配置中心管理器初始化，连接配置中心，监听配置的新增、修改、删除
         ServiceLoader<ConfigCenter> serviceLoader = ServiceLoader.load(ConfigCenter.class);
         final ConfigCenter configCenter = serviceLoader.findFirst().orElseThrow(() -> {
@@ -60,39 +58,25 @@ public class Bootstrap
 
         //连接注册中心，将注册中心的实例加载到本地
         final RegisterCenter registerCenter = registerAndSubscribe(config);
-        //服务优雅关机
-        //进程收到kill信号的时候进行一个注销操作
-        Runtime.getRuntime().addShutdownHook(new Thread(){
 
-            /**
-             * 下线操作
-             */
+        //服务优雅关机
+        //收到kill信号时调用
+        Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
-            public void run(){
-                registerCenter.deregister(
-                        buildGatewayServiceDefinition(config),
+            public void run() {
+                registerCenter.deregister(buildGatewayServiceDefinition(config),
                         buildGatewayServiceInstance(config));
+                container.shutdown();
             }
         });
     }
 
-
-
-
-
-    /**
-     * 当前方法用于提供注册和订阅服务信息变更通知
-     * @param config
-     * @return
-     */
     private static RegisterCenter registerAndSubscribe(Config config) {
-        //加载服务提供者  具体这里的作用可以 查看我的博客
         ServiceLoader<RegisterCenter> serviceLoader = ServiceLoader.load(RegisterCenter.class);
         final RegisterCenter registerCenter = serviceLoader.findFirst().orElseThrow(() -> {
             log.error("not found RegisterCenter impl");
             return new RuntimeException("not found RegisterCenter impl");
         });
-        //初始化注册中心信息
         registerCenter.init(config.getRegistryAddress(), config.getEnv());
 
         //构造网关服务定义和服务实例
@@ -110,16 +94,12 @@ public class Bootstrap
                         JSON.toJSON(serviceInstanceSet));
                 DynamicConfigManager manager = DynamicConfigManager.getInstance();
                 manager.addServiceInstance(serviceDefinition.getUniqueId(), serviceInstanceSet);
+                manager.putServiceDefinition(serviceDefinition.getUniqueId(),serviceDefinition);
             }
         });
         return registerCenter;
     }
 
-    /**
-     * 构建网关服务实例
-     * @param config
-     * @return
-     */
     private static ServiceInstance buildGatewayServiceInstance(Config config) {
         String localIp = NetUtils.getLocalIp();
         int port = config.getPort();
@@ -131,11 +111,6 @@ public class Bootstrap
         return serviceInstance;
     }
 
-    /**
-     * 构建网关服务定义信息
-     * @param config
-     * @return
-     */
     private static ServiceDefinition buildGatewayServiceDefinition(Config config) {
         ServiceDefinition serviceDefinition = new ServiceDefinition();
         serviceDefinition.setInvokerMap(Map.of());
@@ -144,5 +119,4 @@ public class Bootstrap
         serviceDefinition.setEnvType(config.getEnv());
         return serviceDefinition;
     }
-
 }

@@ -7,6 +7,8 @@ import blossom.project.common.exception.ResponseException;
 import blossom.project.core.ConfigLoader;
 import blossom.project.core.context.GatewayContext;
 import blossom.project.core.context.HttpRequestWrapper;
+import blossom.project.core.filter.FilterFactory;
+import blossom.project.core.filter.GatewayFilterChainFactory;
 import blossom.project.core.helper.AsyncHttpHelper;
 import blossom.project.core.helper.RequestHelper;
 import blossom.project.core.helper.ResponseHelper;
@@ -35,6 +37,9 @@ import java.util.concurrent.TimeoutException;
  */
 @Slf4j
 public class NettyCoreProcessor implements NettyProcessor {
+
+    private FilterFactory filterFactory = GatewayFilterChainFactory.getInstance();
+
     @Override
     public void process(HttpRequestWrapper wrapper) {
         FullHttpRequest request = wrapper.getRequest();
@@ -42,11 +47,11 @@ public class NettyCoreProcessor implements NettyProcessor {
 
         try {
             GatewayContext gatewayContext = RequestHelper.doContext(request, ctx);
-            route(gatewayContext);
+            //执行过滤器逻辑
+            filterFactory.buildFilterChain(gatewayContext).doFilter(gatewayContext);
         } catch (BaseException e) {
             log.error("process error {} {}", e.getCode().getCode(), e.getCode().getMessage());
             FullHttpResponse httpResponse = ResponseHelper.getHttpResponse(e.getCode());
-            //回写数据并且释放资源
             doWriteAndRelease(ctx, request, httpResponse);
         } catch (Throwable t) {
             log.error("process unkown error", t);
@@ -62,51 +67,4 @@ public class NettyCoreProcessor implements NettyProcessor {
         ReferenceCountUtil.release(request);
     }
 
-    private void route(GatewayContext gatewayContext) {
-        Request request = gatewayContext.getRequest().build();
-        CompletableFuture<Response> future = AsyncHttpHelper.getInstance().executeRequest(request);
-
-        boolean whenComplete = ConfigLoader.getConfig().isWhenComplete();
-        //判断是否是单异步
-        if (whenComplete) {
-            future.whenComplete((response, throwable) -> {
-               complete(request, response, throwable, gatewayContext);
-            });
-        } else {
-            future.whenCompleteAsync((response, throwable) -> {
-                complete(request, response, throwable, gatewayContext);
-            });
-        }
-    }
-
-    private void complete(Request request,
-                          Response response,
-                          Throwable throwable,
-                          GatewayContext gatewayContext) {
-        gatewayContext.releaseRequest();
-
-        try {
-            //异常信息处理
-            if (Objects.nonNull(throwable)) {
-                String url = request.getUrl();
-                if (throwable instanceof TimeoutException) {
-                    log.warn("complete time out {}", url);
-                    gatewayContext.setThrowable(new ResponseException(ResponseCode.REQUEST_TIMEOUT));
-                } else {
-                    gatewayContext.setThrowable(new ConnectException(throwable,
-                            gatewayContext.getUniqueId(),
-                            url, ResponseCode.HTTP_RESPONSE_ERROR));
-                }
-            } else {
-                //没有异常则正常响应结果
-                gatewayContext.setResponse(GatewayResponse.buildGatewayResponse(response));
-            }
-        } catch (Throwable t) {
-            gatewayContext.setThrowable(new ResponseException(ResponseCode.INTERNAL_ERROR));
-            log.error("complete error", t);
-        } finally {
-            gatewayContext.written();
-            ResponseHelper.writeResponse(gatewayContext);
-        }
-    }
 }

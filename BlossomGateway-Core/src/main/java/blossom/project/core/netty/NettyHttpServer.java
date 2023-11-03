@@ -7,6 +7,7 @@ import blossom.project.core.netty.processor.NettyProcessor;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
@@ -15,6 +16,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.HttpServerExpectContinueHandler;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +65,7 @@ public class NettyHttpServer implements LifeCycle {
         }
     }
 
-    public  boolean useEpoll() {
+    public boolean useEpoll() {
         return RemotingUtil.isLinuxPlatform() && Epoll.isAvailable();
     }
 
@@ -72,6 +74,12 @@ public class NettyHttpServer implements LifeCycle {
         this.serverBootstrap
                 .group(eventLoopGroupBoss, eventLoopGroupWoker)
                 .channel(useEpoll() ? EpollServerSocketChannel.class : NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG, 1024)			//	sync + accept = backlog
+                .option(ChannelOption.SO_REUSEADDR, true)   	//	tcp端口重绑定
+                .option(ChannelOption.SO_KEEPALIVE, true)  	//  如果在两小时内没有数据通信的时候，TCP会自动发送一个活动探测数据报文
+                .childOption(ChannelOption.TCP_NODELAY, true)   //	该参数的左右就是禁用Nagle算法，使用小数据传输时合并
+                .childOption(ChannelOption.SO_SNDBUF, 65535)	//	设置发送数据缓冲区大小
+                .childOption(ChannelOption.SO_RCVBUF, 65535)	//	设置接收数据缓冲区大小
                 .localAddress(new InetSocketAddress(config.getPort()))
                 .childHandler(new ChannelInitializer<Channel>() {
                     @Override
@@ -79,8 +87,9 @@ public class NettyHttpServer implements LifeCycle {
                         ch.pipeline().addLast(
                                 new HttpServerCodec(), //http编解码
                                 new HttpObjectAggregator(config.getMaxContentLength()), //请求报文聚合成FullHttpRequest
-                                new NettyServerConnectManagerHandler(),
-                                new NettyHttpServerHandler(nettyProcessor)
+                                new HttpServerExpectContinueHandler(),
+                                new NettyHttpServerHandler(nettyProcessor),
+                                new NettyServerConnectManagerHandler()
                         );
                     }
                 });

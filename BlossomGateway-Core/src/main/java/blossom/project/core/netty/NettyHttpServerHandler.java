@@ -32,4 +32,9 @@ public class NettyHttpServerHandler extends ChannelInboundHandlerAdapter {
 
         nettyProcessor.process(httpRequestWrapper);
     }
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        super.exceptionCaught(ctx, cause);
+        System.out.println("----");
+    }
 }

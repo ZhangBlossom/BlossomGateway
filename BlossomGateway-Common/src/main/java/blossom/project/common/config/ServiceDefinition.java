@@ -22,32 +22,32 @@ import java.util.Objects;
 public class ServiceDefinition implements Serializable {
 
 	private static final long serialVersionUID = -8263365765897285189L;
-	
+
 	/**
 	 * 	唯一的服务ID: serviceId:version
 	 */
 	private String uniqueId;
-	
+
 	/**
 	 * 	服务唯一id
 	 */
 	private String serviceId;
-	
+
 	/**
 	 * 	服务的版本号
 	 */
 	private String version;
-	
+
 	/**
 	 * 	服务的具体协议：http(mvc http) dubbo ..
 	 */
 	private String protocol;
-	
+
 	/**
 	 * 	路径匹配规则：访问真实ANT表达式：定义具体的服务路径的匹配规则
 	 */
 	private String patternPath;
-	
+
 	/**
 	 * 	环境名称
 	 */
@@ -57,17 +57,17 @@ public class ServiceDefinition implements Serializable {
 	 * 	服务启用禁用
 	 */
 	private boolean enable = true;
-	
+
 	/**
 	 * 	服务列表信息：
 	 */
-	private Map<String /* invokerPath */, ServiceInvoker> invokerMap;
+	private Map<String, ServiceInvoker> invokerMap;
 
 
 	public ServiceDefinition() {
 		super();
 	}
-	
+
 	public ServiceDefinition(String uniqueId, String serviceId, String version, String protocol, String patternPath,
 							 String envType, boolean enable, Map<String, ServiceInvoker> invokerMap) {
 		super();
@@ -83,12 +83,16 @@ public class ServiceDefinition implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if(this == o) return true;
-		if(this == null || getClass() != o.getClass()) return false;
+		if(this == o) {
+			return true;
+		}
+		if(this == null || getClass() != o.getClass()) {
+			return false;
+		}
 		ServiceDefinition serviceDefinition = (ServiceDefinition)o;
 		return Objects.equals(uniqueId, serviceDefinition.uniqueId);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(uniqueId);
@@ -157,6 +161,6 @@ public class ServiceDefinition implements Serializable {
 	public void setInvokerMap(Map<String, ServiceInvoker> invokerMap) {
 		this.invokerMap = invokerMap;
 	}
-	
+
 
 }

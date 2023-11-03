@@ -44,20 +44,20 @@ public class GatewayContext extends BasicContext{
 
 
     public static class Builder{
-       private  String protocol;
-       private ChannelHandlerContext nettyCtx;
-       private boolean keepAlive;
-       private  GatewayRequest request;
-       private Rule rule;
+        private  String protocol;
+        private ChannelHandlerContext nettyCtx;
+        private boolean keepAlive;
+        private  GatewayRequest request;
+        private Rule rule;
 
-       private Builder(){
+        private Builder(){
 
-       }
+        }
 
-       public Builder setProtocol(String protocol){
-           this.protocol = protocol;
-           return this;
-       }
+        public Builder setProtocol(String protocol){
+            this.protocol = protocol;
+            return this;
+        }
 
         public Builder setNettyCtx(ChannelHandlerContext nettyCtx){
             this.nettyCtx = nettyCtx;
@@ -80,7 +80,7 @@ public class GatewayContext extends BasicContext{
         }
 
         public GatewayContext build(){
-           AssertUtil.notNull(protocol,"protocol 不能为空");
+            AssertUtil.notNull(protocol,"protocol 不能为空");
 
             AssertUtil.notNull(nettyCtx,"nettyCtx 不能为空");
 

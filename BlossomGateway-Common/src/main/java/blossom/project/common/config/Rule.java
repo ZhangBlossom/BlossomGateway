@@ -132,7 +132,7 @@ public class Rule implements Comparable<Rule>, Serializable {
     }
 
 
-    public static class FilterConfig{
+    public static class  FilterConfig{
 
         /**
          * 过滤器唯一ID
@@ -161,7 +161,9 @@ public class Rule implements Comparable<Rule>, Serializable {
 
         @Override
         public  boolean equals(Object o){
-            if (this == o) return  true;
+            if (this == o) {
+                return  true;
+            }
 
             if((o== null) || getClass() != o.getClass()){
                 return false;

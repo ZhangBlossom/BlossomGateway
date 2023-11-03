@@ -28,25 +28,24 @@ import static blossom.project.common.enums.ResponseCode.SERVICE_INSTANCE_NOT_FOU
  * LoadBalanceFilter类
  */
 @Slf4j
-@FilterAspect(id=LOAD_BALANCE_FILTER_ID,
-        name = LOAD_BALANCE_FILTER_NAME,
-        order = LOAD_BALANCE_FILTER_ORDER)
+@FilterAspect(id = LOAD_BALANCE_FILTER_ID, name = LOAD_BALANCE_FILTER_NAME, order = LOAD_BALANCE_FILTER_ORDER)
 public class LoadBalanceFilter implements Filter {
 
     @Override
-    public void doFilter(GatewayContext ctx){
+    public void doFilter(GatewayContext ctx) {
         //拿到服务id
         String serviceId = ctx.getUniqueId();
         //从请求上下文中获取负载均衡策略
         LoadBalanceGatewayRule gatewayLoadBalanceRule = getLoadBalanceRule(ctx);
+        //获取某一台服务实例
         ServiceInstance serviceInstance = gatewayLoadBalanceRule.choose(serviceId);
-        System.out.println("IP为"+serviceInstance.getIp()+",端口号："+serviceInstance.getPort());
+        System.out.println("IP为" + serviceInstance.getIp() + ",端口号：" + serviceInstance.getPort());
         GatewayRequest request = ctx.getRequest();
-        if(serviceInstance != null && request != null){
-            String host  = serviceInstance.getIp()+":"+serviceInstance.getPort();
+        if (serviceInstance != null && request != null) {
+            String host = serviceInstance.getIp() + ":" + serviceInstance.getPort();
             request.setModifyHost(host);
-        }else{
-            log.warn("No instance available for :{}",serviceId);
+        } else {
+            log.warn("No instance available for :{}", serviceId);
             throw new NotFoundException(SERVICE_INSTANCE_NOT_FOUND);
         }
     }
