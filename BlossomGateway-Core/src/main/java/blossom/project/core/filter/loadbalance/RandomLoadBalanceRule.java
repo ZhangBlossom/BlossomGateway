@@ -26,8 +26,12 @@ import static blossom.project.common.enums.ResponseCode.SERVICE_INSTANCE_NOT_FOU
 @Slf4j
 public class RandomLoadBalanceRule implements LoadBalanceGatewayRule {
 
+
     private final String serviceId;
 
+    /**
+     * 服务列表
+     */
     private Set<ServiceInstance> serviceInstanceSet;
 
     public RandomLoadBalanceRule(String serviceId) {
