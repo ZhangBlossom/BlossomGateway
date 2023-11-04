@@ -1,5 +1,7 @@
 package blossom.project.common.config;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -51,6 +53,16 @@ public class Rule implements Comparable<Rule>, Serializable {
     private Integer order;
 
     private Set<FilterConfig> filterConfigs =new HashSet<>();
+
+    /**
+     * 限流规则
+     */
+    private Set<FlowCtlConfig> flowCtlConfigs =new HashSet<>();
+
+    private RetryConfig retryConfig = new RetryConfig();
+
+    private Set<HystrixConfig> hystrixConfigs = new HashSet<>();
+
 
     public String getId() {
         return id;
@@ -116,6 +128,31 @@ public class Rule implements Comparable<Rule>, Serializable {
         this.paths = paths;
     }
 
+
+    public Set<FlowCtlConfig> getFlowCtlConfigs() {
+        return flowCtlConfigs;
+    }
+
+    public void setFlowCtlConfigs(Set<FlowCtlConfig> flowCtlConfigs) {
+        this.flowCtlConfigs = flowCtlConfigs;
+    }
+
+    public RetryConfig getRetryConfig() {
+        return retryConfig;
+    }
+
+    public void setRetryConfig(RetryConfig retryConfig) {
+        this.retryConfig = retryConfig;
+    }
+
+    public Set<HystrixConfig> getHystrixConfigs() {
+        return hystrixConfigs;
+    }
+
+    public void setHystrixConfigs(Set<HystrixConfig> hystrixConfigs) {
+        this.hystrixConfigs = hystrixConfigs;
+    }
+
     public Rule(){
         super();
     }
@@ -132,7 +169,7 @@ public class Rule implements Comparable<Rule>, Serializable {
     }
 
 
-    public static class  FilterConfig{
+    public static class FilterConfig{
 
         /**
          * 过滤器唯一ID
@@ -177,6 +214,77 @@ public class Rule implements Comparable<Rule>, Serializable {
         public  int hashCode(){
             return Objects.hash(id);
         }
+    }
+
+    public static class FlowCtlConfig{
+        /**
+         * 限流类型-可能是path，也可能是IP或者服务
+         */
+        private String type;
+        /**
+         * 限流对象的值
+         */
+        private String value;
+        /**
+         * 限流模式-单机还有分布式
+         */
+        private String model;
+        /**
+         * 限流规则,是一个JSON
+         */
+        private String config;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getModel() {
+            return model;
+        }
+
+        public void setModel(String model) {
+            this.model = model;
+        }
+
+        public String getConfig() {
+            return config;
+        }
+
+        public void setConfig(String config) {
+            this.config = config;
+        }
+    }
+
+    public static class RetryConfig{
+        private int times;
+
+        public int getTimes() {
+            return times;
+        }
+
+        public void setTimes(int times) {
+            this.times = times;
+        }
+    }
+
+    @Data
+    public static class HystrixConfig{
+        private String path;
+        private int timeoutInMilliseconds;
+        private int threadCoreSize;
+        private String  fallbackResponse;
     }
 
     /**

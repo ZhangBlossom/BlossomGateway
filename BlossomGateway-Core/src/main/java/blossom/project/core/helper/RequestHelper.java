@@ -51,7 +51,7 @@ public class RequestHelper {
 
         //	构建我们而定GateWayContext对象
         GatewayContext gatewayContext = new GatewayContext(serviceDefinition.getProtocol(), ctx,
-                HttpUtil.isKeepAlive(request), gateWayRequest, rule);
+                HttpUtil.isKeepAlive(request), gateWayRequest, rule,0);
 
 
         //后续服务发现做完，这里都要改成动态的--以及在负载均衡算法实现

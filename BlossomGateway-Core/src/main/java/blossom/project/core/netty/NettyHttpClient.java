@@ -32,6 +32,11 @@ public class NettyHttpClient implements LifeCycle {
         init();
     }
 
+
+    /**
+     * 使用netty框架执行异步http的时候可以使用到
+     * netty本身就支持bio、nio、
+     */
     @Override
     public void init() {
         DefaultAsyncHttpClientConfig.Builder builder = new DefaultAsyncHttpClientConfig.Builder()

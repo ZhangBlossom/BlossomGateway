@@ -30,6 +30,11 @@ public class HttpController {
     @GetMapping("/http-server/ping")
     public String ping() {
         log.info("{}", apiProperties);
+        try {
+            Thread.sleep(10000000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return "pong";
     }
 }
