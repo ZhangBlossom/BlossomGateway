@@ -47,6 +47,8 @@ public class Bootstrap
             log.error("not found ConfigCenter impl");
             return new RuntimeException("not found ConfigCenter impl");
         });
+
+        // 从配置中心获取配置
         configCenter.init(config.getRegistryAddress(), config.getEnv());
         configCenter.subscribeRulesChange(rules -> DynamicConfigManager.getInstance()
                 .putAllRule(rules));

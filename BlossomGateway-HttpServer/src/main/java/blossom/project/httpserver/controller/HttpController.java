@@ -32,7 +32,7 @@ public class HttpController {
         log.info("{}", apiProperties);
         try {
             Thread.sleep(10000000);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return "pong";

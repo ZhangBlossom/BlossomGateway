@@ -38,7 +38,7 @@ public class Rule implements Comparable<Rule>, Serializable {
     /**
      * 后端服务ID
      */
-    private String  serviceId;
+    private String serviceId;
     /**
      * 请求前缀
      */
@@ -52,12 +52,15 @@ public class Rule implements Comparable<Rule>, Serializable {
      */
     private Integer order;
 
-    private Set<FilterConfig> filterConfigs =new HashSet<>();
+    /**
+     * 过滤器配置信息
+     */
+    private Set<FilterConfig> filterConfigs = new HashSet<>();
 
     /**
      * 限流规则
      */
-    private Set<FlowCtlConfig> flowCtlConfigs =new HashSet<>();
+    private Set<FlowControlConfig> flowControlConfigs = new HashSet<>();
 
     private RetryConfig retryConfig = new RetryConfig();
 
@@ -129,12 +132,12 @@ public class Rule implements Comparable<Rule>, Serializable {
     }
 
 
-    public Set<FlowCtlConfig> getFlowCtlConfigs() {
-        return flowCtlConfigs;
+    public Set<FlowControlConfig> getFlowControlConfigs() {
+        return flowControlConfigs;
     }
 
-    public void setFlowCtlConfigs(Set<FlowCtlConfig> flowCtlConfigs) {
-        this.flowCtlConfigs = flowCtlConfigs;
+    public void setFlowControlConfigs(Set<FlowControlConfig> flowControlConfigs) {
+        this.flowControlConfigs = flowControlConfigs;
     }
 
     public RetryConfig getRetryConfig() {
@@ -153,11 +156,12 @@ public class Rule implements Comparable<Rule>, Serializable {
         this.hystrixConfigs = hystrixConfigs;
     }
 
-    public Rule(){
+    public Rule() {
         super();
     }
 
-    public Rule(String id, String name, String protocol, String serviceId, String prefix, List<String> paths, Integer order, Set<FilterConfig> filterConfigs) {
+    public Rule(String id, String name, String protocol, String serviceId, String prefix, List<String> paths,
+                Integer order, Set<FilterConfig> filterConfigs) {
         this.id = id;
         this.name = name;
         this.protocol = protocol;
@@ -169,7 +173,7 @@ public class Rule implements Comparable<Rule>, Serializable {
     }
 
 
-    public static class FilterConfig{
+    public static class FilterConfig {
 
         /**
          * 过滤器唯一ID
@@ -197,26 +201,26 @@ public class Rule implements Comparable<Rule>, Serializable {
         }
 
         @Override
-        public  boolean equals(Object o){
+        public boolean equals(Object o) {
             if (this == o) {
-                return  true;
+                return true;
             }
 
-            if((o== null) || getClass() != o.getClass()){
+            if ((o == null) || getClass() != o.getClass()) {
                 return false;
             }
 
-            FilterConfig that =(FilterConfig)o;
+            FilterConfig that = (FilterConfig) o;
             return id.equals(that.id);
         }
 
         @Override
-        public  int hashCode(){
+        public int hashCode() {
             return Objects.hash(id);
         }
     }
 
-    public static class FlowCtlConfig{
+    public static class FlowControlConfig {
         /**
          * 限流类型-可能是path，也可能是IP或者服务
          */
@@ -267,7 +271,7 @@ public class Rule implements Comparable<Rule>, Serializable {
         }
     }
 
-    public static class RetryConfig{
+    public static class RetryConfig {
         private int times;
 
         public int getTimes() {
@@ -280,31 +284,45 @@ public class Rule implements Comparable<Rule>, Serializable {
     }
 
     @Data
-    public static class HystrixConfig{
+    public static class HystrixConfig {
+        /**
+         * 熔断降级陆军
+         */
         private String path;
+        /**
+         * 超时时间
+         */
         private int timeoutInMilliseconds;
+        /**
+         * 核心线程数量
+         */
         private int threadCoreSize;
-        private String  fallbackResponse;
+        /**
+         * 熔断降级响应
+         */
+        private String fallbackResponse;
     }
 
     /**
      * 向规则里面添加过滤器
+     *
      * @param filterConfig
      * @return
      */
-    public boolean addFilterConfig(FilterConfig filterConfig){
+    public boolean addFilterConfig(FilterConfig filterConfig) {
         return filterConfigs.add(filterConfig);
     }
 
     /**
      * 通过一个指定的FilterID获取FilterConfig
+     *
      * @param id
      * @return
      */
-    public  FilterConfig getFilterConfig(String id){
-        for(FilterConfig config:filterConfigs){
-            if(config.getId().equalsIgnoreCase(id)){
-                return  config;
+    public FilterConfig getFilterConfig(String id) {
+        for (FilterConfig config : filterConfigs) {
+            if (config.getId().equalsIgnoreCase(id)) {
+                return config;
             }
 
         }
@@ -313,11 +331,12 @@ public class Rule implements Comparable<Rule>, Serializable {
 
     /**
      * 根据filterID判断当前Rule是否存在
+     *
      * @return
      */
     public boolean hashId(String id) {
-        for(FilterConfig filterConfig : filterConfigs) {
-            if(filterConfig.getId().equalsIgnoreCase(id)) {
+        for (FilterConfig filterConfig : filterConfigs) {
+            if (filterConfig.getId().equalsIgnoreCase(id)) {
                 return true;
             }
         }
@@ -326,29 +345,29 @@ public class Rule implements Comparable<Rule>, Serializable {
 
     @Override
     public int compareTo(Rule o) {
-        int  orderCompare = Integer.compare(getOrder(),o.getOrder());
-        if(orderCompare == 0){
+        int orderCompare = Integer.compare(getOrder(), o.getOrder());
+        if (orderCompare == 0) {
             return getId().compareTo(o.getId());
         }
         return orderCompare;
     }
 
     @Override
-    public  boolean equals(Object o){
+    public boolean equals(Object o) {
         if (this == o) {
-            return  true;
+            return true;
         }
 
-        if((o== null) || getClass() != o.getClass()){
+        if ((o == null) || getClass() != o.getClass()) {
             return false;
         }
 
-        FilterConfig that =(FilterConfig)o;
+        FilterConfig that = (FilterConfig) o;
         return id.equals(that.id);
     }
 
     @Override
-    public  int hashCode(){
+    public int hashCode() {
         return Objects.hash(id);
     }
 }
