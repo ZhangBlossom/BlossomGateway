@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.cookie.ServerCookieDecoder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.asynchttpclient.Request;
@@ -109,6 +110,11 @@ public class GatewayRequest implements IGatewayRequest{
     @Getter
     private String body;
 
+
+    @Setter
+    @Getter
+    private long userId;
+
     /**
      * 请求Cookie
      */
@@ -139,6 +145,7 @@ public class GatewayRequest implements IGatewayRequest{
 
     /**
      * 构造器
+     * @param uniqueId
      * @param charset
      * @param clientIp
      * @param host
@@ -302,6 +309,8 @@ public class GatewayRequest implements IGatewayRequest{
     @Override
     public Request build() {
         requestBuilder.setUrl(getFinalUrl());
+        //设置用户id 用于下游的服务使用
+        requestBuilder.addHeader("userId", String.valueOf(userId));
         return requestBuilder.build();
     }
 

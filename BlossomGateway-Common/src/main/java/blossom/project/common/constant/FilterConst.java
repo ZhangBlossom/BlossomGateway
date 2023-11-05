@@ -24,6 +24,13 @@ public interface FilterConst {
     String ROUTER_FILTER_NAME = "router_filter";
     int ROUTER_FILTER_ORDER = Integer.MAX_VALUE;
 
+
+    String AUTH_FILTER_ID = "auth_filter";
+
+    String AUTH_FILTER_NAME = "auth_filter";
+
+    int AUTH_FILTER_ORDER = 1;
+
     String FLOW_CTL_FILTER_ID = "flow_ctl_filter";
     String FLOW_CTL_FILTER_NAME = "flow_ctl_filter";
     int FLOW_CTL_FILTER_ORDER = 50;

@@ -13,11 +13,11 @@ import lombok.Getter;
  * ResponseCode类
  */
 
-
 @Getter
 public enum ResponseCode {
 
     SUCCESS(HttpResponseStatus.OK, 0, "成功"),
+    UNAUTHORIZED(HttpResponseStatus.UNAUTHORIZED, 401, "用户未登陆"),
     INTERNAL_ERROR(HttpResponseStatus.INTERNAL_SERVER_ERROR, 1000, "网关内部错误"),
     SERVICE_UNAVAILABLE(HttpResponseStatus.SERVICE_UNAVAILABLE, 2000, "服务暂时不可用,请稍后再试"),
 
