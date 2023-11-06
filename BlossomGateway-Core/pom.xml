@@ -78,7 +78,12 @@
             <version>0.6.0</version>
         </dependency>
 
-
+        <!-- 用于上报监控指标数据 -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.10.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
@@ -124,6 +129,7 @@
             <artifactId>hystrix-javanica</artifactId>
             <version>${hystrix.javanica.version}</version>
         </dependency>
+
 
     </dependencies>
 

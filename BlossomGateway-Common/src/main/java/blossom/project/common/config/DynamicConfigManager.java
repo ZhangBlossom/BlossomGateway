@@ -1,5 +1,7 @@
 package blossom.project.common.config;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -58,8 +60,19 @@ public class DynamicConfigManager {
 
 	/***************** 	对服务实例缓存进行操作的系列方法 	***************/
 
-	public Set<ServiceInstance> getServiceInstanceByUniqueId(String uniqueId){
-		return serviceInstanceMap.get(uniqueId);
+	public Set<ServiceInstance> getServiceInstanceByUniqueId(String uniqueId, boolean gray){
+		Set<ServiceInstance> serviceInstances = serviceInstanceMap.get(uniqueId);
+		if (CollectionUtils.isEmpty(serviceInstances)) {
+			return Collections.emptySet();
+		}
+		//不为空且为灰度流量
+		if (gray) {
+			return  serviceInstances.stream()
+					.filter(ServiceInstance::isGray)
+					.collect(Collectors.toSet());
+		}
+
+		return serviceInstances;
 	}
 
 	public void addServiceInstance(String uniqueId, ServiceInstance serviceInstance) {
@@ -108,13 +121,9 @@ public class DynamicConfigManager {
 	}
 
 	public void putAllRule(List<Rule> ruleList) {
-		//规则与id映射
 		ConcurrentHashMap<String,Rule> newRuleMap = new ConcurrentHashMap<>();
-		//路径与规则映射
 		ConcurrentHashMap<String,Rule> newPathMap = new ConcurrentHashMap<>();
-		//服务与规则列表 一个服务可能有多个规则
 		ConcurrentHashMap<String,List<Rule>> newServiceMap = new ConcurrentHashMap<>();
-		//数据量不大的情况下用for循环比较直观  数据量大用stream性能高一点
 		for(Rule rule : ruleList){
 			newRuleMap.put(rule.getId(),rule);
 			List<Rule> rules = newServiceMap.get(rule.getServiceId());

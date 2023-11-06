@@ -15,7 +15,7 @@ import java.util.Properties;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
+ * 配置加载类
  */
 @Slf4j
 public class ConfigLoader {

@@ -16,6 +16,8 @@ import lombok.Data;
 public class Config {
     private int port = 8888;
 
+    private int prometheusPort = 18000;
+
     private String applicationName = "api-gateway";
 
     private String registryAddress = "127.0.0.1:8848";

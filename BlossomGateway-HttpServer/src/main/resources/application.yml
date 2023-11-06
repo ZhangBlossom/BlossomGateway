@@ -7,3 +7,4 @@ server:
 api:
   registerAddress: 127.0.0.1:8848
   env: dev
+  gray: false

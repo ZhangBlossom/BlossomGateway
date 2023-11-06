@@ -10,6 +10,19 @@ package blossom.project.common.constant;
  * 负载均衡常量类
  */
 public interface FilterConst {
+    String MONITOR_FILTER_ID = "monitor_filter";
+
+    String MONITOR_FILTER_NAME = "monitor_filter";
+
+    int MONITOR_FILTER_ORDER = -1;
+
+    String MONITOR_END_FILTER_ID = "monitor_end_filter";
+    String MONITOR_END_FILTER_NAME = "monitor_end_filter";
+    int MONITOR_END_FILTER_ORDER = Integer.MAX_VALUE - 1;
+
+    String GRAY_FILTER_ID = "gray_filter";
+    String GRAY_FILTER_NAME = "gray_filter";
+    int GRAY_FILTER_ORDER = 0;
 
     String LOAD_BALANCE_FILTER_ID = "load_balance_filter";
     String LOAD_BALANCE_FILTER_NAME = "load_balance_filter";
@@ -28,7 +41,6 @@ public interface FilterConst {
     String AUTH_FILTER_ID = "auth_filter";
 
     String AUTH_FILTER_NAME = "auth_filter";
-
     int AUTH_FILTER_ORDER = 1;
 
     String FLOW_CTL_FILTER_ID = "flow_ctl_filter";
