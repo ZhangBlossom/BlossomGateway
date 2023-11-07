@@ -4,14 +4,11 @@
 
     <!--日志级别：TRACE < DEBUG < INFO < WARN < ERROR < FATAL-->
     <Properties>
-        <!-- 	配置日志文件输出目录,此处为项目根目录下的logs文件夹 	MDC%X   %X{logInfo} %l -->
+        <!-- 	配置日志文件输出目录,此处为项目根目录下的logs文件夹 -->
         <Property name="LOG_HOME">logs</Property>
-        <property name="FILE_NAME">gateway-core</property>
-        <property name="traceLayout">%m%n</property>
-        <property name="patternLayout">[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZ}] [%level{length=5}] [%thread-%tid] [%logger] [%m] %n</property>
-        <!--
-        <property name="jsonLayout">{"time":"%d{yyyy-MM-dd HH:mm:ss.SSS}","level":"%level{length=5}","thread-tid":"%thread-%tid","class":"%logger","hostName":"%X{hostName}","ip":"%X{ip}","applicationName":"%X{applicationName}","traceId":"%X{traceId}","spanId":"%X{spanId}","location":"%F,%L,%C,%M","messageInfo":"%m","throwable":"%ex"}%n</property>
-         -->
+        <!--https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout -->
+        <property name="patternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%20.20t] %40.40c{1.} : %m%n</property>
+        <property name="accessPatternLayout">%d{yyyy-MM-dd HH:mm:ss.SSS} %m %n</property>
     </Properties>
 
     <Appenders>
@@ -19,8 +16,17 @@
             <PatternLayout pattern="${patternLayout}"/>
         </Console>
 
-        <RollingRandomAccessFile name="RandomAccessFile" fileName="${LOG_HOME}/app-${FILE_NAME}.log" filePattern="${LOG_HOME}/app-${FILE_NAME}-%d{yyyy-MM-dd}-%i.log" >
+        <RollingRandomAccessFile name="RandomAccessFile" fileName="${LOG_HOME}/gateway-core.log" filePattern="${LOG_HOME}/gateway-core-%d{yyyy-MM-dd}-%i.log" >
             <PatternLayout pattern="${patternLayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="AccessLogFile" fileName="${LOG_HOME}/access.log" filePattern="${LOG_HOME}/access-%d{yyyy-MM-dd}-%i.log" >
+            <PatternLayout pattern="${accessPatternLayout}" />
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1"/>
                 <SizeBasedTriggeringPolicy size="500MB"/>
@@ -31,6 +37,7 @@
         <Async name="Async" shutdownTimeout="10000">
             <Appender-Ref ref="CONSOLE"/>
             <Appender-Ref ref="RandomAccessFile"/>
+            <Appender-Ref ref="AccessLogFile"/>
         </Async>
     </Appenders>
 
@@ -39,11 +46,14 @@
             <AppenderRef ref="RandomAccessFile"/>
         </Logger>
 
+        <Logger name="accessLog" level="info" includeLocation="false">
+            <AppenderRef ref="AccessLogFile"/>
+        </Logger>
+
         <Root level="info">
             <Appender-Ref ref="CONSOLE"/>
-            <!--  
+            <Appender-Ref ref="accessLog"/>
             <Appender-Ref ref="RandomAccessFile"/>
-            -->
         </Root>
     </Loggers>
 </Configuration>

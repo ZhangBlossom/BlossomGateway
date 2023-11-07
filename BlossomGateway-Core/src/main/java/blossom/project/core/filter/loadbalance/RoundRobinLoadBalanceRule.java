@@ -48,14 +48,14 @@ public class RoundRobinLoadBalanceRule implements LoadBalanceGatewayRule {
     }
 
     @Override
-    public ServiceInstance choose(GatewayContext ctx) {
-        return choose(ctx.getUniqueId());
+    public ServiceInstance choose(GatewayContext ctx,boolean gray) {
+        return choose(ctx.getUniqueId(),gray);
     }
 
     @Override
-    public ServiceInstance choose(String serviceId) {
+    public ServiceInstance choose(String serviceId,boolean gray) {
         Set<ServiceInstance> serviceInstanceSet =
-                DynamicConfigManager.getInstance().getServiceInstanceByUniqueId(serviceId);
+                DynamicConfigManager.getInstance().getServiceInstanceByUniqueId(serviceId,gray);
         if (serviceInstanceSet.isEmpty()) {
             log.warn("No instance available for:{}", serviceId);
             throw new NotFoundException(SERVICE_INSTANCE_NOT_FOUND);

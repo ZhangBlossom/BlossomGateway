@@ -15,6 +15,9 @@ public interface FilterConst {
     String MONITOR_FILTER_NAME = "monitor_filter";
 
     int MONITOR_FILTER_ORDER = -1;
+    String MOCK_FILTER_ID = "mock_filter";
+    String MOCK_FILTER_NAME = "mock_filter";
+    int MOCK_FILTER_ORDER = 0;
 
     String MONITOR_END_FILTER_ID = "monitor_end_filter";
     String MONITOR_END_FILTER_NAME = "monitor_end_filter";

@@ -1,5 +1,8 @@
 package blossom.project.common.config;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -52,6 +55,12 @@ public class ServiceInstance implements Serializable {
 	 */
 	protected String version;
 
+	/**
+	 * 服务实例是否是灰度的
+	 */
+	@Getter
+	@Setter
+	protected boolean gray;
 	public ServiceInstance() {
 		super();
 	}
