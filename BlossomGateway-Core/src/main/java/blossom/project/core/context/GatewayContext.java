@@ -4,8 +4,11 @@ import blossom.project.common.config.Rule;
 import blossom.project.common.utils.AssertUtil;
 import blossom.project.core.request.GatewayRequest;
 import blossom.project.core.response.GatewayResponse;
+import io.micrometer.core.instrument.Timer;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.ReferenceCountUtil;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -29,6 +32,15 @@ public class GatewayContext extends BasicContext{
     private Rule rule;
 
     private int currentRetryTimes;
+
+    @Setter
+    @Getter
+    private boolean gray;
+
+
+    @Setter
+    @Getter
+    private Timer.Sample timerSample;
 
     /**
      * 构造函数

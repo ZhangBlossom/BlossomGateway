@@ -31,10 +31,10 @@ public class HttpController {
     public String ping() {
         log.info("{}", apiProperties);
         try {
-            Thread.sleep(10000000);
+            //Thread.sleep(10000000);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "pong";
+        return "pong gray =false !!!!";
     }
 }

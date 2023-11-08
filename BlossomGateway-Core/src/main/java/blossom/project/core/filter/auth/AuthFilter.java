@@ -25,11 +25,18 @@ import static blossom.project.common.constant.FilterConst.*;
  */
 
 @Slf4j
-@FilterAspect(id= AUTH_FILTER_ID,
-        name = AUTH_FILTER_NAME,
-        order =AUTH_FILTER_ORDER )
+//@FilterAspect(id= AUTH_FILTER_ID,
+//        name = AUTH_FILTER_NAME,
+//        order =AUTH_FILTER_ORDER )
 public class AuthFilter implements Filter {
+    /**
+     * 加密密钥
+     */
     private static final String SECRET_KEY = "zhangblossom";
+
+    /**
+     * cookie键  从对应的cookie中获取到这个键 存储的就是我们的token信息
+     */
     private static final String COOKIE_NAME = "blossomgateway-jwt";
 
     @Override
