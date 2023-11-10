@@ -130,6 +130,18 @@
             <version>${hystrix.javanica.version}</version>
         </dependency>
 
+        <!-- 无锁队列做异步 -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.3.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>3.1.5</version>
+        </dependency>
 
     </dependencies>
 

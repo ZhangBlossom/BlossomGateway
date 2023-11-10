@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.asynchttpclient.Request;
 import org.asynchttpclient.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -38,6 +40,9 @@ import static blossom.project.common.constant.FilterConst.*;
 @Slf4j
 @FilterAspect(id = ROUTER_FILTER_ID, name = ROUTER_FILTER_NAME, order = ROUTER_FILTER_ORDER)
 public class RouterFilter implements Filter {
+
+    private static Logger accessLog = LoggerFactory.getLogger("accessLog");
+
     @Override
     public void doFilter(GatewayContext gatewayContext) throws Exception {
         //首先获取熔断降级的配置
@@ -169,6 +174,17 @@ public class RouterFilter implements Filter {
         } finally {
             gatewayContext.written();
             ResponseHelper.writeResponse(gatewayContext);
+
+            //增加日志记录
+            accessLog.info("{} {} {} {} {} {} {}",
+                    System.currentTimeMillis() - gatewayContext.getRequest().getBeginTime(),
+                    gatewayContext.getRequest().getClientIp(),
+                    gatewayContext.getRequest().getUniqueId(),
+                    gatewayContext.getRequest().getMethod(),
+                    gatewayContext.getRequest().getPath(),
+                    gatewayContext.getResponse().getHttpResponseStatus().code(),
+                    gatewayContext.getResponse().getFutureResponse().getResponseBodyAsBytes().length);
+
         }
     }
 

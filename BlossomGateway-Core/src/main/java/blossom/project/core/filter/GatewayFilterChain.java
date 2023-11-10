@@ -44,6 +44,9 @@ public class GatewayFilterChain {
         try {
             for(Filter fl: filters){
                 fl.doFilter(ctx);
+                if (ctx.isTerminated()){
+                    break;
+                }
             }
         }catch (Exception e){
             log.error("执行过滤器发生异常,异常信息：{}",e.getMessage());

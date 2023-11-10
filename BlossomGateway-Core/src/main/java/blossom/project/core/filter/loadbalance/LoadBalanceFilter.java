@@ -38,7 +38,7 @@ public class LoadBalanceFilter implements Filter {
         //从请求上下文中获取负载均衡策略
         LoadBalanceGatewayRule gatewayLoadBalanceRule = getLoadBalanceRule(ctx);
         //获取某一台服务实例
-        ServiceInstance serviceInstance = gatewayLoadBalanceRule.choose(serviceId);
+        ServiceInstance serviceInstance = gatewayLoadBalanceRule.choose(serviceId, ctx.isGray());
         System.out.println("IP为" + serviceInstance.getIp() + ",端口号：" + serviceInstance.getPort());
         GatewayRequest request = ctx.getRequest();
         if (serviceInstance != null && request != null) {

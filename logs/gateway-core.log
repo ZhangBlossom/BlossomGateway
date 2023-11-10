@@ -1,0 +1,118 @@
+2023-11-10 21:53:33.779  INFO [                main]                          o.r.Reflections : Reflections took 40 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-11-10 21:53:33.839  INFO [                main]                          o.r.Reflections : Reflections took 10 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-11-10 21:53:33.850  INFO [                main]                          o.r.Reflections : Reflections took 8 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-11-10 21:53:33.854  WARN [                main]                          o.r.Reflections : given scan urls are empty. set urls in the configuration
+2023-11-10 21:53:33.858  INFO [                main]                          o.r.Reflections : Reflections took 4 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-11-10 21:53:33.871  INFO [                main]                          o.r.Reflections : Reflections took 6 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-11-10 21:53:33.882  INFO [                main]                          o.r.Reflections : Reflections took 8 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-11-10 21:53:33.886  WARN [                main]                          o.r.Reflections : given scan urls are empty. set urls in the configuration
+2023-11-10 21:53:35.411  INFO [                main]            b.p.c.c.n.i.NacosConfigCenter : config from nacos: {
+    "rules": [
+        {
+            "id": "user-private",
+            "name": "user-private",
+            "paths": [
+                "/user/private/user-info"
+            ],
+            "prefix": "/user/private",
+            "protocol": "http",
+            "serviceId": "backend-user-server",
+            "filterConfigs": [
+                {
+                    "config": {
+                        "load_balance": "Random"
+                    },
+                    "id": "load_balance_filter"
+                },
+                {
+                    "id":"auth_filter"
+                }
+            ]
+        },
+        {
+            "id": "user",
+            "name": "user",
+            "paths": [
+                "/user/login"
+            ],
+            "prefix": "/user",
+            "protocol": "http",
+            "serviceId": "backend-user-server",
+            "filterConfigs": [
+                {
+                    "config": {
+                        "load_balance": "Random"
+                    },
+                    "id": "load_balance_filter"
+                }
+            ]
+        },
+        {
+            "id": "http-server",
+            "name": "http-server",
+            "paths": [
+                "/http-server/ping"
+            ],
+            "prefix": "/http-server",
+            "protocol": "http",
+            "retryConfig": {
+                "times": 5
+            },
+            "serviceId": "backend-http-server",
+            "filterConfigs": [
+                {
+                    "config": {
+                        "load_balance": "Random"
+                    },
+                    "id": "load_balance_filter"
+                },
+                {
+                    "id": "flow_ctl_filter"
+                },
+                {
+                    "id":"mock_filter",
+                    "config":{
+                        "GET /http-server/ping": "mock"
+                    }
+                }
+            ],
+            "flowControlConfigs": [
+                {
+                    "config": {
+                        "duration": 20,
+                        "permits": 2
+                    },
+                    "model": "distributed",
+                    "type": "path",
+                    "value": "/http-server/ping"
+                }
+            ],
+            "hystrixConfigs": [
+                {
+                    "fallbackResponse": "熔断超时",
+                    "path": "/http-server/ping",
+                    "threadCoreSize": 2,
+                    "timeoutInMilliseconds": 5000
+                }
+            ]
+        }
+    ]
+}
+2023-11-10 21:53:35.642  INFO [                main]        b.p.c.f.GatewayFilterChainFactory : load filter success:class blossom.project.core.filter.loadbalance.LoadBalanceFilter,load_balance_filter,load_balance_filter,100
+2023-11-10 21:53:35.659  INFO [                main]        b.p.c.f.GatewayFilterChainFactory : load filter success:class blossom.project.core.filter.router.RouterFilter,router_filter,router_filter,2147483647
+2023-11-10 21:53:35.674  INFO [                main]        b.p.c.f.GatewayFilterChainFactory : load filter success:class blossom.project.core.filter.flow.FlowControlFilter,flow_ctl_filter,flow_ctl_filter,50
+2023-11-10 21:53:35.683  INFO [                main]        b.p.c.f.GatewayFilterChainFactory : load filter success:class blossom.project.core.filter.gray.GrayFilter,gray_filter,gray_filter,0
+2023-11-10 21:53:35.691  INFO [                main]        b.p.c.f.GatewayFilterChainFactory : load filter success:class blossom.project.core.filter.mock.MockFilter,mock_filter,mock_filter,0
+2023-11-10 21:53:36.231  WARN [                main]                    i.n.b.ServerBootstrap : Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x7d7fe4c8]'
+2023-11-10 21:53:36.240  INFO [                main]                  b.p.c.n.NettyHttpServer : server startup on port 8888
+2023-11-10 21:53:36.252  INFO [                main]                          b.p.c.Container : api gateway started!
+2023-11-10 21:53:36.824  INFO [                main]          b.p.r.c.n.i.NacosRegisterCenter : register blossom.project.common.config.ServiceDefinition@5229e9b0 blossom.project.common.config.ServiceInstance@6670cd22
+2023-11-10 21:53:36.841  INFO [                main]          b.p.r.c.n.i.NacosRegisterCenter : service list size 1
+2023-11-10 21:53:36.852  INFO [                main]          b.p.r.c.n.i.NacosRegisterCenter : the triggered event info is：{groupName=null, instances=null, serviceName=api-gateway, clusters=null}
+2023-11-10 21:53:36.908  INFO [                main]                          b.p.c.Bootstrap : refresh service and instance: api-gateway [{address=null, gray=false, port=8888, registerTime=1699624416704, enable=true, ip=192.168.146.1, serviceInstanceId=192.168.146.1:8888, weight=null, version=null, uniqueId=null, tags=null}]
+2023-11-10 21:53:36.909  INFO [                main]          b.p.r.c.n.i.NacosRegisterCenter : subscribe api-gateway dev
+2023-11-10 21:53:46.923  INFO [bscribeAllServices.0]          b.p.r.c.n.i.NacosRegisterCenter : service list size 1
+2023-11-10 21:53:56.933  INFO [bscribeAllServices.0]          b.p.r.c.n.i.NacosRegisterCenter : service list size 1
+2023-11-10 21:54:06.942  INFO [bscribeAllServices.0]          b.p.r.c.n.i.NacosRegisterCenter : service list size 1
+2023-11-10 21:54:16.954  INFO [bscribeAllServices.0]          b.p.r.c.n.i.NacosRegisterCenter : service list size 1
+2023-11-10 21:54:26.963  INFO [bscribeAllServices.0]          b.p.r.c.n.i.NacosRegisterCenter : service list size 1

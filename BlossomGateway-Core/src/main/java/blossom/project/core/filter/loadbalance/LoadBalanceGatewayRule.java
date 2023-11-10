@@ -18,15 +18,17 @@ public interface LoadBalanceGatewayRule {
     /**
      * 通过上下文参数获取服务实例
      * @param ctx
+     * @param gray
      * @return
      */
-    ServiceInstance choose(GatewayContext ctx);
+    ServiceInstance choose(GatewayContext ctx,boolean gray);
 
     /**
      * 通过服务ID拿到对应的服务实例
      * @param serviceId
+     * @param gray
      * @return
      */
-    ServiceInstance choose(String serviceId);
+    ServiceInstance choose(String serviceId,boolean gray);
 
 }

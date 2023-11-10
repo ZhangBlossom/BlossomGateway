@@ -1,6 +1,7 @@
 package blossom.project.core.filter;
 
 import blossom.project.common.config.Rule;
+import blossom.project.common.constant.FilterConst;
 import blossom.project.core.context.GatewayContext;
 import blossom.project.core.filter.router.RouterFilter;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +78,11 @@ public class GatewayFilterChainFactory implements FilterFactory {
     public GatewayFilterChain buildFilterChain(GatewayContext ctx) throws Exception {
         GatewayFilterChain chain = new GatewayFilterChain();
         List<Filter> filters = new ArrayList<>();
-        //获取过滤器配置规则  是我们再配置中心进行配置的
+        //将灰度发布过滤器放入过滤器链
+        filters.add(getFilterInfo(FilterConst.GRAY_FILTER_ID));
+        //filters.add(getFilterInfo(FilterConst.MONITOR_FILTER_ID));
+        //filters.add(getFilterInfo(FilterConst.MONITOR_END_FILTER_ID));
+
         //这是由于我们的过滤器链是由我们的规则定义的
         Rule rule = ctx.getRule();
         if (rule != null) {
