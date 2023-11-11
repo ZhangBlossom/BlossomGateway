@@ -74,11 +74,11 @@ public class MonitorEndFilter implements Filter {
                 throw new RuntimeException(e);
             }
             //TODO 这里直接写死代码 mock一下 后续需要修改
-            Timer timer = prometheusMeterRegistry.timer("gateway_request",
-                    "uniqueId", "backend-http-server:1.0.0",
-                    "protocol", "http",
-                    "path", "/http-server/ping" + RandomUtils.nextInt(10, 200));
-            sample.stop(timer);
+            //Timer timer = prometheusMeterRegistry.timer("gateway_request",
+            //        "uniqueId", "backend-http-server:1.0.0",
+            //        "protocol", "http",
+            //        "path", "/http-server/ping" + RandomUtils.nextInt(10, 200));
+            //sample.stop(timer);
         }, 200, 100, TimeUnit.MILLISECONDS);
     }
 

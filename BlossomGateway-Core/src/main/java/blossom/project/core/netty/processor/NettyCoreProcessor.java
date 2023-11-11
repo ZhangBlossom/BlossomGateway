@@ -66,5 +66,13 @@ public class NettyCoreProcessor implements NettyProcessor {
                 .addListener(ChannelFutureListener.CLOSE); //释放资源后关闭channel
         ReferenceCountUtil.release(request);
     }
+    @Override
+    public void start() {
 
+    }
+
+    @Override
+    public void shutDown() {
+
+    }
 }

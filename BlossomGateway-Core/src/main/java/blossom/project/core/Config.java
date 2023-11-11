@@ -1,5 +1,6 @@
 package blossom.project.core;
 
+import com.lmax.disruptor.*;
 import lombok.Data;
 
 /**
@@ -9,7 +10,7 @@ import lombok.Data;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
+ * Config类 项目配置类
  */
 
 @Data
@@ -28,7 +29,8 @@ public class Config {
 
     private int eventLoopGroupBossNum = 1;
 
-    private int eventLoopGroupWokerNum = Runtime.getRuntime().availableProcessors();
+    //private int eventLoopGroupWokerNum = Runtime.getRuntime().availableProcessors();
+    private int eventLoopGroupWokerNum = 1;
 
     private int maxContentLength = 64 * 1024 * 1024;
 
@@ -54,6 +56,34 @@ public class Config {
 
     //	客户端空闲连接超时时间, 默认60秒
     private int httpPooledConnectionIdleTimeout = 60 * 1000;
+
+    private String bufferType = "parallel";
+
+    private int bufferSize = 1024 * 16;
+
+    private int processThread = Runtime.getRuntime().availableProcessors();
+
+    private String waitStrategy ="blocking";
+
+    /**
+     * 策略模式获取等待策略
+     *
+     * @return
+     */
+    public WaitStrategy getWaitStrategy(){
+        switch (waitStrategy){
+            case "blocking":
+                return  new BlockingWaitStrategy();
+            case "busySpin":
+                return  new BusySpinWaitStrategy();
+            case "yielding":
+                return  new YieldingWaitStrategy();
+            case "sleeping":
+                return  new SleepingWaitStrategy();
+            default:
+                return new BlockingWaitStrategy();
+        }
+    }
 
     //扩展.......
 }

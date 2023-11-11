@@ -4,11 +4,14 @@ import blossom.project.common.config.Rule;
 import blossom.project.common.constant.FilterConst;
 import blossom.project.core.context.GatewayContext;
 import blossom.project.core.filter.router.RouterFilter;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: ZhangBlossom
@@ -28,27 +31,27 @@ public class GatewayFilterChainFactory implements FilterFactory {
         private static final GatewayFilterChainFactory INSTANCE = new GatewayFilterChainFactory();
     }
 
-    /**
-     * 饿汉式获取单例
-     * @return
-     */
     public static GatewayFilterChainFactory getInstance() {
         return SingletonInstance.INSTANCE;
     }
 
-    private Map<String, Filter> processorFilterIdMap = new ConcurrentHashMap<>();
 
     /**
-     * 通过ServiceLoader的方式添加我们实现的过滤器类
-     * 将其保存到系统缓存中
+     * 使用Caffeine缓存 并且设定过期时间10min
      */
+    private Cache<String, GatewayFilterChain> chainCache = Caffeine.newBuilder().recordStats().expireAfterWrite(10,
+            TimeUnit.MINUTES).build();
+
+
+    private Map<String, Filter> processorFilterIdMap = new ConcurrentHashMap<>();
+
     public GatewayFilterChainFactory() {
         ServiceLoader<Filter> serviceLoader = ServiceLoader.load(Filter.class);
         serviceLoader.stream().forEach(filterProvider -> {
             Filter filter = filterProvider.get();
             FilterAspect annotation = filter.getClass().getAnnotation(FilterAspect.class);
-            log.info("load filter success:{},{},{},{}", filter.getClass(),
-                    annotation.id(), annotation.name(), annotation.order());
+            log.info("load filter success:{},{},{},{}", filter.getClass(), annotation.id(), annotation.name(),
+                    annotation.order());
             if (annotation != null) {
                 //添加到过滤集合
                 String filterId = annotation.id();
@@ -61,32 +64,26 @@ public class GatewayFilterChainFactory implements FilterFactory {
 
     }
 
-    //测试功能是否成功
     public static void main(String[] args) {
         new GatewayFilterChainFactory();
     }
 
 
-    /**
-     * 对网关请求上下文
-     * 通过配置中心选定对应的配置
-     * @param ctx
-     * @return
-     * @throws Exception
-     */
     @Override
     public GatewayFilterChain buildFilterChain(GatewayContext ctx) throws Exception {
+        //return chainCache.get(ctx.getRule().getId(),k->doBuildFilterChain(ctx.getRule()));
+        return doBuildFilterChain(ctx.getRule());
+    }
+
+
+    public GatewayFilterChain doBuildFilterChain(Rule rule) {
         GatewayFilterChain chain = new GatewayFilterChain();
         List<Filter> filters = new ArrayList<>();
-        //将灰度发布过滤器放入过滤器链
-        filters.add(getFilterInfo(FilterConst.GRAY_FILTER_ID));
+        //filters.add(getFilterInfo(FilterConst.GRAY_FILTER_ID));
         //filters.add(getFilterInfo(FilterConst.MONITOR_FILTER_ID));
         //filters.add(getFilterInfo(FilterConst.MONITOR_END_FILTER_ID));
-
-        //这是由于我们的过滤器链是由我们的规则定义的
-        Rule rule = ctx.getRule();
+        //filters.add(getFilterInfo(FilterConst.MOCK_FILTER_ID));
         if (rule != null) {
-            //获取所有的过滤器
             Set<Rule.FilterConfig> filterConfigs = rule.getFilterConfigs();
             Iterator iterator = filterConfigs.iterator();
             Rule.FilterConfig filterConfig;
@@ -102,8 +99,8 @@ public class GatewayFilterChainFactory implements FilterFactory {
                 }
             }
         }
-        //添加路由过滤器-因为我们的网关最后要执行的就是路由转发
-        filters.add(new RouterFilter());
+        //添加路由过滤器-这是最后一步
+        filters.add(getFilterInfo(FilterConst.ROUTER_FILTER_ID));
         //排序
         filters.sort(Comparator.comparingInt(Filter::getOrder));
         //添加到链表中
@@ -112,7 +109,7 @@ public class GatewayFilterChainFactory implements FilterFactory {
     }
 
     @Override
-    public Filter getFilterInfo(String filterId) throws Exception {
+    public Filter getFilterInfo(String filterId) {
         return processorFilterIdMap.get(filterId);
     }
 }
