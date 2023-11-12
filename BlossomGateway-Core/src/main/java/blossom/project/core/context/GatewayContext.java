@@ -37,7 +37,9 @@ public class GatewayContext extends BasicContext{
     @Getter
     private boolean gray;
 
-
+    /**
+     * 记录应用程序中的方法调用或服务请求所花费的时间
+     */
     @Setter
     @Getter
     private Timer.Sample timerSample;
