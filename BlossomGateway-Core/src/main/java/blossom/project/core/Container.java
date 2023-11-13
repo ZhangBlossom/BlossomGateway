@@ -16,7 +16,6 @@ import static blossom.project.common.constant.GatewayConst.BUFFER_TYPE_PARALLEL;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- *
  */
 @Slf4j
 public class Container implements LifeCycle {
@@ -38,11 +37,11 @@ public class Container implements LifeCycle {
 
         NettyCoreProcessor nettyCoreProcessor = new NettyCoreProcessor();
         //如果启动要使用多生产者多消费组 那么我们读取配置
-        if(BUFFER_TYPE_PARALLEL.equals(config.getBufferType())){
+        if (BUFFER_TYPE_PARALLEL.equals(config.getDefaultBufferType())) {
             //开启配置的情况下使用Disruptor
-            this.nettyProcessor = new DisruptorNettyCoreProcessor(config,nettyCoreProcessor);
-        }else{
-            this. nettyProcessor = nettyCoreProcessor;
+            this.nettyProcessor = new DisruptorNettyCoreProcessor(config, nettyCoreProcessor);
+        } else {
+            this.nettyProcessor = nettyCoreProcessor;
         }
 
         this.nettyHttpServer = new NettyHttpServer(config, nettyProcessor);
@@ -54,7 +53,8 @@ public class Container implements LifeCycle {
     @Override
     public void start() {
         nettyProcessor.start();
-        nettyHttpServer.start();;
+        nettyHttpServer.start();
+        ;
         nettyHttpClient.start();
         log.info("api gateway started!");
     }

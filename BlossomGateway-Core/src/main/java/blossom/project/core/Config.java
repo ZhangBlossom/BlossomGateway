@@ -57,7 +57,8 @@ public class Config {
     //	客户端空闲连接超时时间, 默认60秒
     private int httpPooledConnectionIdleTimeout = 60 * 1000;
 
-    private String bufferType = "parallel";
+    private String defaultBufferType = "default";
+    private String parallelBufferType = "parallel";
 
     private int bufferSize = 1024 * 16;
 

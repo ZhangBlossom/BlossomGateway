@@ -165,9 +165,11 @@ public class NacosRegisterCenter implements RegisterCenter {
                     //nacos事件监听器 订阅当前服务
                     //这里我们需要自己实现一个nacos的事件订阅类 来具体执行订阅执行时的操作
                     EventListener eventListener = new NacosRegisterListener();
+                    //当前服务之前不存在 调用监听器方法进行添加处理
                     eventListener.onEvent(new NamingEvent(service, null));
+                    //为指定的服务和环境注册一个事件监听器
                     namingService.subscribe(service, env, eventListener);
-                    log.info("subscribe {} {}", service, env);
+                    log.info("subscribe a service ，ServiceName {} Env {}", service, env);
                 }
                 //遍历下一页的服务列表
                 serviseList = namingService.getServicesOfServer(++pageNo, pageSize, env).getData();
@@ -227,7 +229,8 @@ public class NacosRegisterCenter implements RegisterCenter {
                     }
                     //调用我们自己的订阅监听器
                     //TODO 这里得好好理一下思路 为什么要怎么写 什么作用?
-                    registerCenterListenerList.stream().forEach(l -> l.onChange(serviceDefinition, set));
+                    registerCenterListenerList.stream().forEach(registerCenterListener ->
+                            registerCenterListener.onChange(serviceDefinition, set));
                 } catch (NacosException e) {
                     throw new RuntimeException(e);
                 }
