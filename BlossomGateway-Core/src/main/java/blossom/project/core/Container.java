@@ -54,7 +54,6 @@ public class Container implements LifeCycle {
     public void start() {
         nettyProcessor.start();
         nettyHttpServer.start();
-        ;
         nettyHttpClient.start();
         log.info("api gateway started!");
     }

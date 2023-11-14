@@ -42,7 +42,6 @@ public class DynamicConfigManager {
 
 	public void putServiceDefinition(String uniqueId,
 									 ServiceDefinition serviceDefinition) {
-
 		serviceDefinitionMap.put(uniqueId, serviceDefinition);;
 	}
 

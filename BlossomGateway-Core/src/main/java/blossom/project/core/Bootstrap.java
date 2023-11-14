@@ -1,10 +1,5 @@
 package blossom.project.core;
 
-/**
- * API网关启动类
- *
- */
-
 import blossom.project.common.config.DynamicConfigManager;
 import blossom.project.common.config.ServiceDefinition;
 import blossom.project.common.config.ServiceInstance;
@@ -50,7 +45,7 @@ public class Bootstrap
 
         // 从配置中心获取配置
         configCenter.init(config.getRegistryAddress(), config.getEnv());
-        configCenter.subscribeRulesChange(rules -> DynamicConfigManager.getInstance()
+            configCenter.subscribeRulesChange(rules -> DynamicConfigManager.getInstance()
                 .putAllRule(rules));
 
 
@@ -95,7 +90,9 @@ public class Bootstrap
                 log.info("refresh service and instance: {} {}", serviceDefinition.getUniqueId(),
                         JSON.toJSON(serviceInstanceSet));
                 DynamicConfigManager manager = DynamicConfigManager.getInstance();
+                //将这次变更事件影响之后的服务实例再次添加到对应的服务实例集合
                 manager.addServiceInstance(serviceDefinition.getUniqueId(), serviceInstanceSet);
+                //修改发生对应的服务定义
                 manager.putServiceDefinition(serviceDefinition.getUniqueId(),serviceDefinition);
             }
         });

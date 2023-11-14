@@ -141,7 +141,7 @@ public class NacosRegisterCenter implements RegisterCenter {
             //得到当前服务已经订阅的服务
             //这里其实已经在init的时候初始化过namingservice了，所以这里可以直接拿到当前服务已经订阅的服务
             //如果不了解的可以debug
-            Set<String> subscribeService =
+            Set<String> subscribeServiceSet =
                     namingService.getSubscribeServices().stream().map(ServiceInfo::getName).collect(Collectors.toSet());
 
 
@@ -158,7 +158,7 @@ public class NacosRegisterCenter implements RegisterCenter {
 
                 for (String service : serviseList) {
                     //判断是否已经订阅了当前服务
-                    if (subscribeService.contains(service)) {
+                    if (subscribeServiceSet.contains(service)) {
                         continue;
                     }
 
