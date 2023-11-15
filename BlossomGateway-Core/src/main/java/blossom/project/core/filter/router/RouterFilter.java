@@ -147,12 +147,14 @@ public class RouterFilter implements Filter {
         int currentRetryTimes = gatewayContext.getCurrentRetryTimes();
         int confRetryTimes = rule.getRetryConfig().getTimes();
 
-        if ((throwable instanceof TimeoutException || throwable instanceof IOException) && currentRetryTimes <= confRetryTimes && !hystrixConfig.isPresent()) {
+        if ((throwable instanceof TimeoutException || throwable instanceof IOException) &&
+                currentRetryTimes <= confRetryTimes && !hystrixConfig.isPresent()) {
             doRetry(gatewayContext, currentRetryTimes);
             return;
         }
 
         try {
+            //之前出现了异常 执行异常返回逻辑
             if (Objects.nonNull(throwable)) {
                 String url = request.getUrl();
                 if (throwable instanceof TimeoutException) {
@@ -165,6 +167,7 @@ public class RouterFilter implements Filter {
                     gatewayContext.setResponse(GatewayResponse.buildGatewayResponse(ResponseCode.HTTP_RESPONSE_ERROR));
                 }
             } else {
+                //没有出现异常直接正常返回
                 gatewayContext.setResponse(GatewayResponse.buildGatewayResponse(response));
             }
         } catch (Throwable t) {

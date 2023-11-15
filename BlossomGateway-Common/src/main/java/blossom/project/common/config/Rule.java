@@ -1,6 +1,9 @@
 package blossom.project.common.config;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -18,6 +21,9 @@ import java.util.Set;
  * @github: https://github.com/ZhangBlossom
  * Rule规则类
  */
+@Data
+@AllArgsConstructor
+@Builder
 public class Rule implements Comparable<Rule>, Serializable {
 
     /**
@@ -61,100 +67,14 @@ public class Rule implements Comparable<Rule>, Serializable {
      * 限流规则
      */
     private Set<FlowControlConfig> flowControlConfigs = new HashSet<>();
-
+    /**
+     * 重试规则
+     */
     private RetryConfig retryConfig = new RetryConfig();
-
+    /**
+     * 熔断规则
+     */
     private Set<HystrixConfig> hystrixConfigs = new HashSet<>();
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getProtocol() {
-        return protocol;
-    }
-
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public Set<FilterConfig> getFilterConfigs() {
-        return filterConfigs;
-    }
-
-    public void setFilterConfigs(Set<FilterConfig> filterConfigs) {
-        this.filterConfigs = filterConfigs;
-    }
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public List<String> getPaths() {
-        return paths;
-    }
-
-    public void setPaths(List<String> paths) {
-        this.paths = paths;
-    }
-
-
-    public Set<FlowControlConfig> getFlowControlConfigs() {
-        return flowControlConfigs;
-    }
-
-    public void setFlowControlConfigs(Set<FlowControlConfig> flowControlConfigs) {
-        this.flowControlConfigs = flowControlConfigs;
-    }
-
-    public RetryConfig getRetryConfig() {
-        return retryConfig;
-    }
-
-    public void setRetryConfig(RetryConfig retryConfig) {
-        this.retryConfig = retryConfig;
-    }
-
-    public Set<HystrixConfig> getHystrixConfigs() {
-        return hystrixConfigs;
-    }
-
-    public void setHystrixConfigs(Set<HystrixConfig> hystrixConfigs) {
-        this.hystrixConfigs = hystrixConfigs;
-    }
 
     public Rule() {
         super();
@@ -172,7 +92,7 @@ public class Rule implements Comparable<Rule>, Serializable {
         this.filterConfigs = filterConfigs;
     }
 
-
+    @Data
     public static class FilterConfig {
 
         /**
@@ -184,21 +104,6 @@ public class Rule implements Comparable<Rule>, Serializable {
          */
         private String config;
 
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getConfig() {
-            return config;
-        }
-
-        public void setConfig(String config) {
-            this.config = config;
-        }
 
         @Override
         public boolean equals(Object o) {
@@ -220,6 +125,7 @@ public class Rule implements Comparable<Rule>, Serializable {
         }
     }
 
+    @Data
     public static class FlowControlConfig {
         /**
          * 限流类型-可能是path，也可能是IP或者服务
@@ -237,40 +143,8 @@ public class Rule implements Comparable<Rule>, Serializable {
          * 限流规则,是一个JSON
          */
         private String config;
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        public String getModel() {
-            return model;
-        }
-
-        public void setModel(String model) {
-            this.model = model;
-        }
-
-        public String getConfig() {
-            return config;
-        }
-
-        public void setConfig(String config) {
-            this.config = config;
-        }
     }
-
+    @Data
     public static class RetryConfig {
         private int times;
 

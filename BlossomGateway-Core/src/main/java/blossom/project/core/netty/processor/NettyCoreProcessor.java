@@ -2,30 +2,18 @@ package blossom.project.core.netty.processor;
 
 import blossom.project.common.enums.ResponseCode;
 import blossom.project.common.exception.BaseException;
-import blossom.project.common.exception.ConnectException;
-import blossom.project.common.exception.ResponseException;
-import blossom.project.core.ConfigLoader;
 import blossom.project.core.context.GatewayContext;
 import blossom.project.core.context.HttpRequestWrapper;
-import blossom.project.core.filter.FilterFactory;
-import blossom.project.core.filter.GatewayFilterChainFactory;
-import blossom.project.core.helper.AsyncHttpHelper;
+import blossom.project.core.filter.FilterChainFactory;
+import blossom.project.core.filter.GatewayFilterChainChainFactory;
 import blossom.project.core.helper.RequestHelper;
 import blossom.project.core.helper.ResponseHelper;
-import blossom.project.core.response.GatewayResponse;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.asynchttpclient.Request;
-import org.asynchttpclient.Response;
-
-
-import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeoutException;
 
 /**
  * @author: ZhangBlossom
@@ -42,8 +30,8 @@ import java.util.concurrent.TimeoutException;
 @Slf4j
 public class NettyCoreProcessor implements NettyProcessor {
 
-    // FilterFactory 负责创建和管理过滤器的执行。
-    private FilterFactory filterFactory = GatewayFilterChainFactory.getInstance();
+    // FilterChainFactory 负责创建和管理过滤器的执行。
+    private FilterChainFactory filterChainFactory = GatewayFilterChainChainFactory.getInstance();
 
     /**
      * 处理传入的 HTTP 请求。
@@ -60,7 +48,7 @@ public class NettyCoreProcessor implements NettyProcessor {
             GatewayContext gatewayContext = RequestHelper.doContext(request, ctx);
 
             // 在 GatewayContext 上执行过滤器链逻辑。
-            filterFactory.buildFilterChain(gatewayContext).doFilter(gatewayContext);
+            filterChainFactory.buildFilterChain(gatewayContext).doFilter(gatewayContext);
         } catch (BaseException e) {
             // 通过记录日志并发送适当的 HTTP 响应处理已知异常。
             log.error("处理错误 {} {}", e.getCode().getCode(), e.getCode().getMessage());

@@ -9,9 +9,10 @@ import blossom.project.core.context.GatewayContext;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * FilterFactory接口
+ * FilterChainFactory接口
+ * 过滤器链工厂 用于生成过滤器链
  */
-public interface FilterFactory {
+public interface FilterChainFactory {
 
     /**
      * 构建过滤器链条
@@ -29,6 +30,5 @@ public interface FilterFactory {
      * @throws Exception
      */
     <T> T getFilterInfo(String filterId) throws Exception;
-
 
 }

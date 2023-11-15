@@ -3,7 +3,6 @@ package blossom.project.core.filter;
 import blossom.project.common.config.Rule;
 import blossom.project.common.constant.FilterConst;
 import blossom.project.core.context.GatewayContext;
-import blossom.project.core.filter.router.RouterFilter;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +24,13 @@ import java.util.concurrent.TimeUnit;
  * 用于构造过滤器链条
  */
 @Slf4j
-public class GatewayFilterChainFactory implements FilterFactory {
+public class GatewayFilterChainChainFactory implements FilterChainFactory {
 
     private static class SingletonInstance {
-        private static final GatewayFilterChainFactory INSTANCE = new GatewayFilterChainFactory();
+        private static final GatewayFilterChainChainFactory INSTANCE = new GatewayFilterChainChainFactory();
     }
 
-    public static GatewayFilterChainFactory getInstance() {
+    public static GatewayFilterChainChainFactory getInstance() {
         return SingletonInstance.INSTANCE;
     }
 
@@ -42,10 +41,13 @@ public class GatewayFilterChainFactory implements FilterFactory {
     private Cache<String, GatewayFilterChain> chainCache = Caffeine.newBuilder().recordStats().expireAfterWrite(10,
             TimeUnit.MINUTES).build();
 
-
+    /**
+     * 过滤器存储映射 过滤器id - 过滤器
+     */
     private Map<String, Filter> processorFilterIdMap = new ConcurrentHashMap<>();
 
-    public GatewayFilterChainFactory() {
+    public GatewayFilterChainChainFactory() {
+        //加载所有过滤器
         ServiceLoader<Filter> serviceLoader = ServiceLoader.load(Filter.class);
         serviceLoader.stream().forEach(filterProvider -> {
             Filter filter = filterProvider.get();
@@ -65,7 +67,7 @@ public class GatewayFilterChainFactory implements FilterFactory {
     }
 
     public static void main(String[] args) {
-        new GatewayFilterChainFactory();
+        new GatewayFilterChainChainFactory();
     }
 
 
@@ -79,10 +81,11 @@ public class GatewayFilterChainFactory implements FilterFactory {
     public GatewayFilterChain doBuildFilterChain(Rule rule) {
         GatewayFilterChain chain = new GatewayFilterChain();
         List<Filter> filters = new ArrayList<>();
-        //filters.add(getFilterInfo(FilterConst.GRAY_FILTER_ID));
-        //filters.add(getFilterInfo(FilterConst.MONITOR_FILTER_ID));
-        //filters.add(getFilterInfo(FilterConst.MONITOR_END_FILTER_ID));
-        //filters.add(getFilterInfo(FilterConst.MOCK_FILTER_ID));
+        //手动将某些过滤器加入到过滤器链中
+        filters.add(getFilterInfo(FilterConst.GRAY_FILTER_ID));
+        filters.add(getFilterInfo(FilterConst.MONITOR_FILTER_ID));
+        filters.add(getFilterInfo(FilterConst.MONITOR_END_FILTER_ID));
+        filters.add(getFilterInfo(FilterConst.MOCK_FILTER_ID));
         if (rule != null) {
             Set<Rule.FilterConfig> filterConfigs = rule.getFilterConfigs();
             Iterator iterator = filterConfigs.iterator();
