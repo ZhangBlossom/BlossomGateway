@@ -70,8 +70,9 @@ public class LoadBalanceFilter implements Filter {
                     continue;
                 }
                 String filterId = filterConfig.getId();
-                if (filterId.equals(LOAD_BALANCE_FILTER_ID)) {
+                if (LOAD_BALANCE_FILTER_ID.equals(filterId)) {
                     String config = filterConfig.getConfig();
+                    //默认选择随机负载均衡过滤器
                     String strategy = LOAD_BALANCE_STRATEGY_RANDOM;
                     if (StringUtils.isNotEmpty(config)) {
                         Map<String, String> mapTypeMap = JSON.parseObject(config, Map.class);

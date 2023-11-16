@@ -73,8 +73,8 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
 
     @Override
     public GatewayFilterChain buildFilterChain(GatewayContext ctx) throws Exception {
-        //return chainCache.get(ctx.getRule().getId(),k->doBuildFilterChain(ctx.getRule()));
-        return doBuildFilterChain(ctx.getRule());
+        return chainCache.get(ctx.getRule().getId(),k->doBuildFilterChain(ctx.getRule()));
+        //return doBuildFilterChain(ctx.getRule());
     }
 
 
@@ -83,8 +83,8 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
         List<Filter> filters = new ArrayList<>();
         //手动将某些过滤器加入到过滤器链中
         filters.add(getFilterInfo(FilterConst.GRAY_FILTER_ID));
-        filters.add(getFilterInfo(FilterConst.MONITOR_FILTER_ID));
-        filters.add(getFilterInfo(FilterConst.MONITOR_END_FILTER_ID));
+        //filters.add(getFilterInfo(FilterConst.MONITOR_FILTER_ID));
+        //filters.add(getFilterInfo(FilterConst.MONITOR_END_FILTER_ID));
         filters.add(getFilterInfo(FilterConst.MOCK_FILTER_ID));
         if (rule != null) {
             Set<Rule.FilterConfig> filterConfigs = rule.getFilterConfigs();

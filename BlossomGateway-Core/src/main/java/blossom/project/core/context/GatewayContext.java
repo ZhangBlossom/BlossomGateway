@@ -158,6 +158,7 @@ public class GatewayContext extends BasicContext{
 
     /**
      * 重写父类释放资源方法，用于正在释放资源
+     * release() 方法通常减少对象的引用计数。当计数达到零时，资源被释放。
      */
     public void releaseRequest(){
         if(requestReleased.compareAndSet(false,true)){

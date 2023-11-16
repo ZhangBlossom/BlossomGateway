@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -71,7 +72,18 @@ public class RouterFilter implements Filter {
 
     /**
      * 正常异步路由逻辑
+     *whenComplete方法:
      *
+     * whenComplete是一个非异步的完成方法。
+     * 当CompletableFuture的执行完成或者发生异常时，它提供了一个回调。
+     * 这个回调将在CompletableFuture执行的相同线程中执行。这意味着，如果CompletableFuture的操作是阻塞的，那么回调也会在同一个阻塞的线程中执行。
+     * 在这段代码中，如果whenComplete为true，则在future完成时使用whenComplete方法。这意味着complete方法将在future所在的线程中被调用。
+     * whenCompleteAsync方法:
+     *
+     * whenCompleteAsync是异步的完成方法。
+     * 它也提供了一个在CompletableFuture执行完成或者发生异常时执行的回调。
+     * 与whenComplete不同，这个回调将在不同的线程中异步执行。通常情况下，它将在默认的ForkJoinPool中的某个线程上执行，除非提供了自定义的Executor。
+     * 在代码中，如果whenComplete为false，则使用whenCompleteAsync。这意味着complete方法将在不同的线程中异步执行。
      * @param gatewayContext
      * @param hystrixConfig
      * @return
@@ -79,6 +91,7 @@ public class RouterFilter implements Filter {
     private CompletableFuture<Response> route(GatewayContext gatewayContext,
                                               Optional<Rule.HystrixConfig> hystrixConfig) {
         Request request = gatewayContext.getRequest().build();
+        //执行具体的请求 并得到一个CompleatableFuture对象用于帮助我们执行后续的处理
         CompletableFuture<Response> future = AsyncHttpHelper.getInstance().executeRequest(request);
         boolean whenComplete = ConfigLoader.getConfig().isWhenComplete();
         if (whenComplete) {
@@ -141,14 +154,17 @@ public class RouterFilter implements Filter {
 
     private void complete(Request request, Response response, Throwable throwable, GatewayContext gatewayContext,
                           Optional<Rule.HystrixConfig> hystrixConfig) {
+        //请求已经处理完毕 释放请求资源
         gatewayContext.releaseRequest();
-
+        //获取网关上下文规则
         Rule rule = gatewayContext.getRule();
+        //获取请求重试次数
         int currentRetryTimes = gatewayContext.getCurrentRetryTimes();
         int confRetryTimes = rule.getRetryConfig().getTimes();
-
+        //判断是否出现异常 如果是 进行重试
         if ((throwable instanceof TimeoutException || throwable instanceof IOException) &&
                 currentRetryTimes <= confRetryTimes && !hystrixConfig.isPresent()) {
+            //请求重试
             doRetry(gatewayContext, currentRetryTimes);
             return;
         }
@@ -196,6 +212,7 @@ public class RouterFilter implements Filter {
         System.out.println("当前重试次数为" + retryTimes);
         gatewayContext.setCurrentRetryTimes(retryTimes + 1);
         try {
+            //调用路由过滤器方法再次进行请求重试
             doFilter(gatewayContext);
         } catch (Exception e) {
             throw new RuntimeException(e);

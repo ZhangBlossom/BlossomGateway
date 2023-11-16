@@ -25,9 +25,9 @@ import static blossom.project.common.constant.FilterConst.*;
  */
 
 @Slf4j
-//@FilterAspect(id= AUTH_FILTER_ID,
-//        name = AUTH_FILTER_NAME,
-//        order =AUTH_FILTER_ORDER )
+@FilterAspect(id= AUTH_FILTER_ID,
+        name = AUTH_FILTER_NAME,
+        order =AUTH_FILTER_ORDER )
 public class AuthFilter implements Filter {
     /**
      * 加密密钥
