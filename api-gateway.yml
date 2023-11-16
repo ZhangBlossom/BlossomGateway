@@ -1,0 +1,67 @@
+{
+  "rules": [
+    {
+      "id": "user-private",
+      "name": "user-private",
+      "paths": [
+        "/user/private/user-info"
+      ],
+      "prefix": "/user/private",
+      "protocol": "http",
+      "serviceId": "backend-user-server",
+      "filterConfigs": [
+        {
+          "config": {
+            "load_balance": "Random"
+          },
+          "id": "load_balance_filter"
+        },
+        {
+          "id":"auth_filter"
+        }
+      ]
+    },
+    {
+      "id": "user",
+      "name": "user",
+      "paths": [
+        "/user/login"
+      ],
+      "prefix": "/user",
+      "protocol": "http",
+      "serviceId": "backend-user-server",
+      "filterConfigs": [
+        {
+          "config": {
+            "load_balance": "Random"
+          },
+          "id": "load_balance_filter"
+        }
+      ]
+    },
+    {
+      "id": "http-server",
+      "name": "http-server",
+      "paths": [
+        "/http-server/ping"
+      ],
+      "prefix": "/http-server",
+      "protocol": "http",
+      "retryConfig": {
+        "times": 3
+      },
+      "serviceId": "backend-http-server",
+      "filterConfigs": [
+        {
+          "config": {
+            "load_balance": "RoundRobin"
+          },
+          "id": "load_balance_filter"
+        },
+        {
+          "id": "auth_filter"
+        }
+      ]
+    }
+  ]
+}

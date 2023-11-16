@@ -37,7 +37,7 @@ public class Container implements LifeCycle {
 
         NettyCoreProcessor nettyCoreProcessor = new NettyCoreProcessor();
         //如果启动要使用多生产者多消费组 那么我们读取配置
-        if (BUFFER_TYPE_PARALLEL.equals(config.getDefaultBufferType())) {
+        if (BUFFER_TYPE_PARALLEL.equals(config.getParallelBufferType())) {
             //开启配置的情况下使用Disruptor
             this.nettyProcessor = new DisruptorNettyCoreProcessor(config, nettyCoreProcessor);
         } else {
