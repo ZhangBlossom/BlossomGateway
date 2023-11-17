@@ -24,6 +24,8 @@ import static blossom.project.common.constant.BasicConst.COLON_SEPARATOR;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
+ * 以史鉴今
+ * 可以知兴替
  * 启动类
  */
 @Slf4j
