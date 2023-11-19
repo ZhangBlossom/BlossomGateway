@@ -1,4 +1,7 @@
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/46f53d6a-d845-46ea-a5a1-4d9c5f090cbb)# BlossomGateway
+进群需要点⭐才能得到资料哦！
+
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/46f53d6a-d845-46ea-a5a1-4d9c5f090cbb)
+
 BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为注册与配置中心。
 
 项目实现多种过滤器，包含路由、负载均衡、鉴权、灰度发布等过滤器。
@@ -15,7 +18,4 @@ CSDN：https://blog.csdn.net/Zhangsama1/article/details/134354438?spm=1001.2014.
 
 博客中的内容并不完整，完整4w字文档请私信我获取。
 
-有兴趣的也可以联系我一起开发这个项目哦！
 
-拜托拜托点个⭐吧~
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/1716f36f-dfeb-4028-8de6-2d88d07db2e9)
