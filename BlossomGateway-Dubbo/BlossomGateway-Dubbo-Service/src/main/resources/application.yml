@@ -1,0 +1,21 @@
+dubbo:
+  application:
+    name: backend-dubbo-server
+  protocol:
+    name: dubbo
+    port: 12345
+  registry:
+    address: nacos://localhost:8848
+
+spring:
+  application:
+    name: dubbo-server
+
+server:
+  port: 8083
+
+
+api:
+  registerAddress: 127.0.0.1:8848
+  env: dev
+  gray: false

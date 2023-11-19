@@ -20,6 +20,9 @@
         <option value="$PROJECT_DIR$/BlossomGateway-Config-Center/BlossomGateway-Config-Center-Api/pom.xml" />
         <option value="$PROJECT_DIR$/BlossomGateway-Config-Center/BlossomGateway-Config-Center-Nacos-Impl/pom.xml" />
         <option value="$PROJECT_DIR$/BlossomGateway-UserService/pom.xml" />
+        <option value="$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Web/pom.xml" />
+        <option value="$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Interface/pom.xml" />
       </list>
     </option>
   </component>

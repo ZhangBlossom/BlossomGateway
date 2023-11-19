@@ -25,4 +25,6 @@ public @interface ApiService {
     ApiProtocol protocol();
 
     String patternPath();
+
+    String interfaceName() default "";
 }

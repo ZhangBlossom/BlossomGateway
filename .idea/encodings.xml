@@ -13,6 +13,12 @@
     <file url="file://$PROJECT_DIR$/BlossomGateway-Config-Center/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Interface/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Interface/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/BlossomGateway-Dubbo-Web/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-HttpServer/src/main/java" charset="UTF-8" />

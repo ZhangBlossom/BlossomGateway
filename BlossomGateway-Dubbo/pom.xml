@@ -9,11 +9,64 @@
         <artifactId>BlossomGateway</artifactId>
         <version>1.0</version>
     </parent>
+    <!-- 确保这里是 "pom" -->
     <artifactId>BlossomGateway-Dubbo</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>BlossomGateway-Dubbo-Web</module>
+        <module>BlossomGateway-Dubbo-Interface</module>
+        <module>BlossomGateway-Dubbo-Service</module>
+    </modules>
 
     <properties>
+        <dubbo.version>3.2.0-beta.4</dubbo.version>
+        <spring-boot.version>2.7.8</spring-boot.version>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper-curator5</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 </project>

@@ -9,14 +9,16 @@
         <module name="BlossomGateway-Common" />
         <module name="BlossomGateway-HttpServer" />
         <module name="BlossomGateway-Config-Center-Nacos-Impl" />
+        <module name="BlossomGateway-Register-Center" />
+        <module name="BlossomGateway-Dubbo-Service" />
+        <module name="BlossomGateway-UserService" />
         <module name="BlossomGateway-Register-Center-Nacos-Impl" />
-        <module name="BlossomGateway-Dubbo" />
         <module name="BlossomGateway-Register-Center-Api" />
         <module name="BlossomGateway-Config-Center-Api" />
-        <module name="BlossomGateway-Register-Center" />
+        <module name="BlossomGateway-Dubbo-Interface" />
         <module name="BlossomGateway-Core" />
-        <module name="BlossomGateway-UserService" />
         <module name="BlossomGateway-Client" />
+        <module name="BlossomGateway-Dubbo-Web" />
         <module name="BlossomGateway-Config-Center" />
       </profile>
     </annotationProcessing>
