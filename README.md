@@ -1,6 +1,7 @@
 进群需要点⭐才能得到资料哦！
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/46f53d6a-d845-46ea-a5a1-4d9c5f090cbb)
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/1ad7a1bc-bdaa-46fb-b542-94aa2c22de1f)
+
 
 BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为注册与配置中心。
 
