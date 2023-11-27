@@ -1,5 +1,7 @@
 进群需要点⭐才能得到资料哦！
 
+顺便麻烦您花30s来填写一个问卷吧： https://www.wjx.cn/vm/edgeJyf.aspx
+
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/1ad7a1bc-bdaa-46fb-b542-94aa2c22de1f)
 
 
