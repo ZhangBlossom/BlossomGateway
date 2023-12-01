@@ -1,8 +1,7 @@
 进群需要点⭐才能得到资料哦！
 
-顺便麻烦您花30s来填写一个问卷吧： https://www.wjx.cn/vm/edgeJyf.aspx
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/af7eeaf9-f17e-46c5-908f-5c16205b7aca)
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/1ad7a1bc-bdaa-46fb-b542-94aa2c22de1f)
 
 
 BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为注册与配置中心。
@@ -19,6 +18,5 @@ CSDN：https://blog.csdn.net/Zhangsama1/article/details/134354438?spm=1001.2014.
 
 掘金：https://juejin.cn/post/7300477763394977792
 
-博客中的内容并不完整，完整4w字文档请私信我获取。
 
 
