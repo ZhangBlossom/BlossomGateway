@@ -23,6 +23,8 @@
     <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-HttpServer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-HttpServer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Netty/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomGateway-Netty/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Nacos-Impl/src/main/java" charset="UTF-8" />

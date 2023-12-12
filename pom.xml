@@ -18,6 +18,7 @@
         <module>BlossomGateway-HttpServer</module>
         <module>BlossomGateway-Config-Center</module>
         <module>BlossomGateway-Register-Center</module>
+        <module>BlossomGateway-Netty</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
