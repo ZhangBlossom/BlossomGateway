@@ -9,7 +9,7 @@
         <artifactId>BlossomGateway</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>BlossomGateway-HttpServer</artifactId>
+    <artifactId>BlossomGateway-Http</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>

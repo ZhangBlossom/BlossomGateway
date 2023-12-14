@@ -15,7 +15,7 @@
         <module>BlossomGateway-Common</module>
         <module>BlossomGateway-Client</module>
         <module>BlossomGateway-Dubbo</module>
-        <module>BlossomGateway-HttpServer</module>
+        <module>BlossomGateway-Http</module>
         <module>BlossomGateway-Config-Center</module>
         <module>BlossomGateway-Register-Center</module>
         <module>BlossomGateway-Netty</module>

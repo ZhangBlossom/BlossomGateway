@@ -112,6 +112,8 @@ public class NettyHttpServer implements LifeCycle {
         // 绑定端口并启动服务，等待服务端关闭
         try {
             this.serverBootstrap.bind().sync();
+            //也可以用这种方法进行netty端口监听的绑定
+            //this.serverBootstrap.bind(config.getPort()).sync();
             log.info("server startup on port {}", this.config.getPort());
         } catch (Exception e) {
             throw new RuntimeException("启动服务器时发生异常", e);

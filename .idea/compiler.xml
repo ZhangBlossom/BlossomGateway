@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="BlossomGateway-Common" />
-        <module name="BlossomGateway-HttpServer" />
         <module name="BlossomGateway-Config-Center-Nacos-Impl" />
         <module name="BlossomGateway-Register-Center" />
         <module name="BlossomGateway-Dubbo-Service" />
         <module name="BlossomGateway-Netty" />
+        <module name="BlossomGateway-Http" />
         <module name="BlossomGateway-Register-Center-Nacos-Impl" />
         <module name="BlossomGateway-Register-Center-Api" />
         <module name="BlossomGateway-Config-Center-Api" />
