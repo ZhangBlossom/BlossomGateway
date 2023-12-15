@@ -18,7 +18,9 @@
         <module>BlossomGateway-Http</module>
         <module>BlossomGateway-Config-Center</module>
         <module>BlossomGateway-Register-Center</module>
-        <module>BlossomGateway-Netty</module>
+        <module>BlossomGateway-RPC-Core</module>
+        <module>BlossomGateway-RPC-Server</module>
+        <module>BlossomGateway-RPC-Client</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
