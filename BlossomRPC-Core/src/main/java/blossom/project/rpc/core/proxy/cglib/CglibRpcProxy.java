@@ -16,18 +16,18 @@ import java.lang.reflect.Method;
  * RpcCglibProxy类用来测试是否可以用CGLIB实现动态代理
  *
  */
-public class RpcCglibProxy implements MethodInterceptor {
+public class CglibRpcProxy implements MethodInterceptor {
 
     private Object target;
 
-    public RpcCglibProxy(Object target) {
+    public CglibRpcProxy(Object target) {
         this.target = target;
     }
 
     public static Object createProxy(Object target) {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(target.getClass());
-        enhancer.setCallback(new RpcCglibProxy(target));
+        enhancer.setCallback(new CglibRpcProxy(target));
         return enhancer.create();
     }
 
@@ -73,7 +73,7 @@ public class RpcCglibProxy implements MethodInterceptor {
         request.setParams(new Object[]{"Hello, CGLIB RPC!"});
         request.setParamsTypes(new Class<?>[]{String.class});
 
-        Object result = RpcCglibProxy.invoke(request);
+        Object result = CglibRpcProxy.invoke(request);
         System.out.println(result);
     }
 }

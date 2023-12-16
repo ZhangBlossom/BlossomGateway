@@ -2,6 +2,7 @@ package blossom.project.rpc.server.service.impl;
 
 import blossom.project.rpc.core.service.BlossomRpcService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
  * @author: ZhangBlossom
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * 远程被调用的服务的具体实现
  */
 @Slf4j
+@Service
 public class BlossomRpcServiceImpl implements BlossomRpcService {
     @Override
     public String saveInfo(String info) {

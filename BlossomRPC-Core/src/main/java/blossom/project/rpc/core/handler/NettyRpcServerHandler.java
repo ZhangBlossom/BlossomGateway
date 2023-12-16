@@ -6,7 +6,8 @@ import blossom.project.rpc.core.entity.RpcHeader;
 import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.entity.RpcResponse;
 import blossom.project.rpc.core.enums.ReqTypeEnum;
-import blossom.project.rpc.core.proxy.SpringBeanManager;
+import blossom.project.rpc.core.proxy.spring.SpringBeanManager;
+import blossom.project.rpc.core.proxy.spring.SpringRpcProxy;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -25,7 +26,12 @@ import java.lang.reflect.Method;
  * 1:服务端接收到请求数据之后，需要进行解析
  * 2:解析后确定具体要调用的请求服务是哪一个
  * 2.1：这里应该要用到动态代理了
- * 2.2：分析使用那种动态代理 JDK/CGLIB/SpringAOP
+ * 2.2：分析使用那种动态代理 JDK/CGLIB/SpringIoC
+ * 2.3：分析这三种方法的代码实现
+ * 1：对于JDK直接用正常的反射
+ * 2：对于CGLIB那么就是走CGLIB的常规写法
+ * 3：对于Spring就要考虑把这些类存到容器中，
+ * 然后要使用的时候从容器中进行获取
  */
 public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcDto<RpcRequest>> {
 
@@ -35,9 +41,13 @@ public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcDto<Rp
         //当前是响应数据
         header.setReqType(ReqTypeEnum.RESPONSE.getCode());
         //使用反射的方式在运行时调用对应的类的方法
-        //TODO 这里的思考一下用什么方式可以最快的得到我想要的类
-        Object data = invoke(msg.getData());
-
+        //这里你可以思考一下用什么方式可以最快的找到我想要的类并且调用方法
+        //目前我提供了：JDK CGLIB SpringIOC容器 HashMap自制工厂
+        Object data = SpringRpcProxy.invoke(msg.getData());
+        //使用JDK动态代理
+        //Object data = RpcInvocationHandler.invoke(msg.getData());
+        //使用CGLIB动态代理
+        //Object data = RpcCglibProxy.invoke(msg.getData());
         RpcDto<RpcResponse> dto = new RpcDto();
         RpcResponse response = new RpcResponse();
         response.setData(data);
@@ -48,27 +58,4 @@ public class NettyRpcServerHandler extends SimpleChannelInboundHandler<RpcDto<Rp
         ctx.writeAndFlush(dto);
     }
 
-
-    /**
-     * 反射方法调用
-     * @param request
-     * @return
-     */
-    private Object invoke(RpcRequest request) {
-        try {
-            Class<?> clazz = Class.forName(request.getClassName());
-            Object bean = SpringBeanManager.getBean(clazz);
-            Method method = clazz.getDeclaredMethod(request.getMethodName(), request.getParamsTypes());
-            return method.invoke(bean, request.getParams());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

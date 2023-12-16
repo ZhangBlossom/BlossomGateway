@@ -17,11 +17,11 @@ import java.lang.reflect.Proxy;
  * 当前类就是测试是否可以使用RpcRequest来进行运行时方法调用
  * 运行main方法后发现是可以的
  */
-public class RpcInvocationHandler implements InvocationHandler {
+public class JdkRpcProxy implements InvocationHandler {
 
     private Object target;
 
-    public RpcInvocationHandler(Object target) {
+    public JdkRpcProxy(Object target) {
         this.target = target;
     }
     //原生JDK动态代理的方法 应该用不太上
@@ -63,19 +63,20 @@ public class RpcInvocationHandler implements InvocationHandler {
     public static void main(String[] args) throws Exception {
 
         // 假设JdkRpcService是接口，JdkRpcServiceImpl是实现类
-        ServiceRegistry.register(JdkRpcService.class.getName(), new JdkRpcServiceImpl());
+        ServiceRegistry.register
+                (JdkRpcService.class.getName(), new JdkRpcServiceImpl());
 
 
         RpcRequest request = new RpcRequest();
         //这里要解决只用用全类路径的问题需要引入注册中心
         //这里我简单的用Map模拟了一个注册中心
-        request.setClassName("blossom.project.rpc.core.proxy.jdk.JdkRpcServiceImpl");
+        request.setClassName("blossom.project.rpc.core.proxy.jdk.JdkRpcService");
         request.setMethodName("testJdkRpc");
         request.setParams(new Object[]{"hello!!!JdkRpc!!!"});
         request.setParamsTypes(new Class<?>[]{String.class});
 
         // 使用自定义的 invoke 方法处理 RpcRequest
-        Object result = RpcInvocationHandler.invoke(request);
+        Object result = JdkRpcProxy.invoke(request);
         System.out.println(result);
     }
 
@@ -88,7 +89,7 @@ public class RpcInvocationHandler implements InvocationHandler {
         JdkRpcService serviceProxy = (JdkRpcService) Proxy.newProxyInstance(
                 JdkRpcService.class.getClassLoader(),
                 new Class<?>[]{JdkRpcService.class},
-                new RpcInvocationHandler(service)
+                new JdkRpcProxy(service)
         );
 
         // 通过代理对象调用方法

@@ -23,7 +23,7 @@ public class NettyRpcServerInitializer extends ChannelInitializer<SocketChannel>
         log.info("---The system starts to initialize the <NettyRpcServer>---");
         ch.pipeline().
                 addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,
-                        12,
+                        15,
                         4,
                         0,
                         0))
