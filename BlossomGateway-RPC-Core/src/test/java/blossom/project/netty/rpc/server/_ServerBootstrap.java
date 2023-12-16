@@ -1,17 +1,15 @@
-package blossom.project.netty;
+package blossom.project.netty.rpc.server;
 
-import blossom.project.netty.codec.MessageDecode;
-import blossom.project.netty.codec.MessageEncode;
-import blossom.project.netty.handler.ServerMessageHandler;
+import blossom.project.netty.rpc.codec.MessageDecode;
+import blossom.project.netty.rpc.codec.MessageEncode;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-
-import io.netty.channel.socket.SocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
 

@@ -1,6 +1,6 @@
-package blossom.project.client.handler;
+package blossom.project.netty.rpc.client;
 
-import blossom.project.netty.eneity.Message;
+import blossom.project.netty.rpc.protocol.Message;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;

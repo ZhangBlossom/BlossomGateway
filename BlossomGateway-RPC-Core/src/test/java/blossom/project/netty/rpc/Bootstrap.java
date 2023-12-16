@@ -1,10 +1,11 @@
-package blossom.project.netty;
+package blossom.project.netty.rpc;
 
-import blossom.project.netty.codec.MessageDecode;
-import blossom.project.netty.codec.MessageEncode;
-import blossom.project.netty.eneity.Header;
-import blossom.project.netty.eneity.Message;
-import blossom.project.netty.enums.ReqTypeEnum;
+import blossom.project.netty.rpc.codec.MessageDecode;
+import blossom.project.netty.rpc.codec.MessageEncode;
+
+import blossom.project.netty.rpc.enums.ReqTypeEnum;
+import blossom.project.netty.rpc.protocol.Header;
+import blossom.project.netty.rpc.protocol.Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.embedded.EmbeddedChannel;

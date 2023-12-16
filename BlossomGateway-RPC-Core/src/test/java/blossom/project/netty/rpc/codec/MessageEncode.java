@@ -21,7 +21,7 @@ public class MessageEncode extends MessageToByteEncoder<Message> {
      * @throws Exception
      */
     @Override
-    protected void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
+    public void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
         if (Objects.isNull(msg)){
             log.info("the Message is Null!!!");
             return;

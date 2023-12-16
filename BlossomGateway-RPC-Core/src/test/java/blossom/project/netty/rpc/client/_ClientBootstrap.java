@@ -1,14 +1,16 @@
-package blossom.project.client;
+package blossom.project.netty.rpc.client;
 
 
-import blossom.project.client.handler.ClientMessageHandler;
-import blossom.project.netty.codec.MessageDecode;
-import blossom.project.netty.codec.MessageEncode;
-import blossom.project.netty.eneity.Header;
-import blossom.project.netty.eneity.Message;
-import blossom.project.netty.enums.ReqTypeEnum;
+import blossom.project.netty.rpc.codec.MessageDecode;
+import blossom.project.netty.rpc.codec.MessageEncode;
+import blossom.project.netty.rpc.enums.ReqTypeEnum;
+import blossom.project.netty.rpc.protocol.Header;
+import blossom.project.netty.rpc.protocol.Message;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;

@@ -1,8 +1,8 @@
 package blossom.project.netty.rpc.client;
 
-import blossom.project.netty.enums.ReqTypeEnum;
 import blossom.project.netty.rpc.codec.MessageDecode;
 import blossom.project.netty.rpc.codec.MessageEncode;
+import blossom.project.netty.rpc.enums.ReqTypeEnum;
 import blossom.project.netty.rpc.protocol.Header;
 import blossom.project.netty.rpc.protocol.Message;
 import io.netty.bootstrap.Bootstrap;
