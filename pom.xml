@@ -18,9 +18,9 @@
         <module>BlossomGateway-Http</module>
         <module>BlossomGateway-Config-Center</module>
         <module>BlossomGateway-Register-Center</module>
-        <module>BlossomGateway-RPC-Core</module>
-        <module>BlossomGateway-RPC-Server</module>
-        <module>BlossomGateway-RPC-Client</module>
+        <module>BlossomRPC-Core</module>
+        <module>BlossomRPC-Server</module>
+        <module>BlossomRPC-Client</module>
     </modules>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
@@ -59,6 +59,7 @@
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.asynchttpclient</groupId>
             <artifactId>async-http-client</artifactId>

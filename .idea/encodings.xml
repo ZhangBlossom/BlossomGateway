@@ -23,12 +23,6 @@
     <file url="file://$PROJECT_DIR$/BlossomGateway-Dubbo/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Http/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Http/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BlossomGateway-RPC-Client/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BlossomGateway-RPC-Client/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BlossomGateway-RPC-Core/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BlossomGateway-RPC-Core/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BlossomGateway-RPC-Server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/BlossomGateway-RPC-Server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/BlossomGateway-Register-Center-Nacos-Impl/src/main/java" charset="UTF-8" />
@@ -37,6 +31,12 @@
     <file url="file://$PROJECT_DIR$/BlossomGateway-Register-Center/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-UserService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BlossomGateway-UserService/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BlossomRPC-Server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />

@@ -11,16 +11,16 @@
         <module name="BlossomGateway-Register-Center" />
         <module name="BlossomGateway-Dubbo-Service" />
         <module name="BlossomGateway-Http" />
-        <module name="BlossomGateway-RPC-Server" />
-        <module name="BlossomGateway-RPC-Core" />
+        <module name="BlossomRPC-Client" />
         <module name="BlossomGateway-Register-Center-Nacos-Impl" />
+        <module name="BlossomRPC-Core" />
         <module name="BlossomGateway-Register-Center-Api" />
-        <module name="BlossomGateway-RPC-Client" />
         <module name="BlossomGateway-Config-Center-Api" />
         <module name="BlossomGateway-Dubbo-Interface" />
         <module name="BlossomGateway-Core" />
         <module name="BlossomGateway-Client" />
         <module name="BlossomGateway-Dubbo-Web" />
+        <module name="BlossomRPC-Server" />
         <module name="BlossomGateway-Config-Center" />
       </profile>
     </annotationProcessing>
@@ -30,8 +30,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="BlossomGateway-RPC-Core" options="" />
       <module name="BlossomGateway-UserService" options="-parameters" />
+      <module name="BlossomRPC-Core" options="" />
     </option>
   </component>
 </project>

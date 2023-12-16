@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>BlossomGateway-RPC-Core</artifactId>
+    <artifactId>BlossomRPC-Core</artifactId>
     <description>
         RPC模块，当前模块实现了基于Netty的RPC功能。
         1：主要提供编解码器以及协议定义
@@ -25,6 +25,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
+            <version>4.1.51.Final</version>
         </dependency>
         <!--  protobuf 支持 Java 核心包-->
         <dependency>
@@ -32,15 +33,29 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.16.3</version>
         </dependency>
-
-
         <!--  proto 与 Json 互转会用到-->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java-util</artifactId>
             <version>3.16.3</version>
         </dependency>
-
+        <!-- 使用fastjson进行json序列化 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.73</version>
+        </dependency>
+        <!-- 使用spring的IOC工厂加速开发 实现反射-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>2.7.8</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>3.3.0</version>
+        </dependency>
 
     </dependencies>
 
