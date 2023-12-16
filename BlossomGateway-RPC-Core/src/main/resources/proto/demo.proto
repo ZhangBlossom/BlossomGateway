@@ -1,0 +1,19 @@
+syntax = "proto3";
+//使用 proto3 语法 ,未指定则使用proto2
+
+//生成 proto 文件所在包路径
+package blossom.project.netty.protobuf;
+
+//生成 proto 文件所在包路径
+option java_package = "blossom.project.netty.protobuf";
+
+//生成 proto 文件名
+option java_outer_classname="DemoProto";
+
+message Demo{
+  //自身属性
+  int32 id = 1;
+  string code = 2;
+  string name = 3;
+}
+

@@ -26,6 +26,21 @@
             <artifactId>netty-all</artifactId>
             <version>4.1.67.Final</version>
         </dependency>
+        <!--  protobuf 支持 Java 核心包-->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.16.3</version>
+        </dependency>
+
+
+        <!--  proto 与 Json 互转会用到-->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>3.16.3</version>
+        </dependency>
+
 
     </dependencies>
 
