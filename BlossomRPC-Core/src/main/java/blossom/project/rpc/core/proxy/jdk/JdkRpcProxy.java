@@ -1,7 +1,7 @@
 package blossom.project.rpc.core.proxy.jdk;
 
 import blossom.project.rpc.core.entity.RpcRequest;
-import blossom.project.rpc.core.register.ServiceRegistry;
+import blossom.project.rpc.core.proxy.jdk.register.ServiceRegistry;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

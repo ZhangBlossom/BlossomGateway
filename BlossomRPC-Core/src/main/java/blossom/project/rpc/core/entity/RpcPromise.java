@@ -5,7 +5,11 @@ import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.util.concurrent.DefaultPromise;
 import io.netty.util.concurrent.Promise;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author: ZhangBlossom
@@ -27,13 +31,15 @@ import lombok.Data;
  *
  */
 @Data
-public class RpcPromise<T> {
+@NoArgsConstructor
+public class RpcPromise<T>  extends DefaultPromise<T>
+{
 
-    private Promise<T> promise;
-
-    public RpcPromise(Promise<T> promise) {
-        this.promise = promise;
-    }
+    //private Promise<T> promise;
+    //
+    //public RpcPromise(Promise<T> promise) {
+    //    this.promise = promise;
+    //}
 
 
     /**
@@ -49,11 +55,17 @@ public class RpcPromise<T> {
      * 9: cache应该是map结构
      * @param args
      */
-    public static void main(String[] args) {
-        RpcPromise<RpcResponse> promise1=new RpcPromise<>
-                (new DefaultPromise<RpcResponse>
-                        (new DefaultEventLoop()));
-        promise1.promise.setSuccess(new RpcResponse());
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        //1：使用Promise作为属性
+        //RpcPromise<RpcResponse> promise1=new RpcPromise<>
+        //        (new DefaultPromise<RpcResponse>
+        //                (new DefaultEventLoop()));
+        //promise1.promise.setSuccess(new RpcResponse());
+        //promise1.setSuccess(new RpcResponse());
+        //第二种方式 直接用原生defaultpromise
+        RpcPromise promise = new RpcPromise();
+        promise.setSuccess("success");
+        promise.get();
 
     }
 }

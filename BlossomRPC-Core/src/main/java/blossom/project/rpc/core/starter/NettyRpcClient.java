@@ -81,18 +81,18 @@ public class NettyRpcClient {
 
             // 添加监听器处理writeAndFlush的结果
             // 1：添加监听器异步等待
-            sendFuture.addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture future) throws Exception {
-                    if (future.isSuccess()) {
-                        // 写操作成功
-                        log.info("Message send successfully...");
-                    } else {
-                        // 写操作失败，处理错误
-                        log.error("Failed to send message", future.cause());
-                    }
-                }
-            });
+            //sendFuture.addListener(new ChannelFutureListener() {
+            //    @Override
+            //    public void operationComplete(ChannelFuture future) throws Exception {
+            //        if (future.isSuccess()) {
+            //            // 写操作成功
+            //            log.info("Message send successfully...");
+            //        } else {
+            //            // 写操作失败，处理错误
+            //            log.error("Failed to send message", future.cause());
+            //        }
+            //    }
+            //});
             //Void unused = sendFuture.get();
             //TODO 这里写出这些代码只是为了帮助你了解还有很多种
             //方式可以处理ChannelFuture 不过这里中方法是同步的

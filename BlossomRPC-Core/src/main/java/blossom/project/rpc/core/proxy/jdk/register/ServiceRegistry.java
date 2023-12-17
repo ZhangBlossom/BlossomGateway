@@ -1,4 +1,4 @@
-package blossom.project.rpc.core.register;
+package blossom.project.rpc.core.proxy.jdk.register;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,6 +2,7 @@ package blossom.project.rpc.core.handler;
 
 import blossom.project.rpc.core.codec.RpcDecode;
 import blossom.project.rpc.core.codec.RpcEncode;
+import blossom.project.rpc.core.constants.RpcCommonConstants;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
@@ -24,9 +25,11 @@ public class NettyRpcClientInitializer extends ChannelInitializer<SocketChannel>
         log.info("---The system starts to initialize the <NettyRpcClient>---");
         ch.pipeline().addLast(
                         new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,
-                                12,
+                                //拒绝硬编码从我做起
+                                RpcCommonConstants.HEADER_LENGTH-4,
                                 4,
-                                0,0))
+                                0,
+                                0))
                 .addLast(new LoggingHandler())
                 .addLast(new RpcEncode())
                 .addLast(new RpcDecode())
