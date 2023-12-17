@@ -9,7 +9,7 @@ package blossom.project.rpc.core.service;
  * @github: https://github.com/ZhangBlossom
  * BlossomRpcService接口
  */
-public interface BlossomRpcService {
+public interface RpcService {
 
-    String saveInfo(String info);
+    String testRpcRequest(String info);
 }

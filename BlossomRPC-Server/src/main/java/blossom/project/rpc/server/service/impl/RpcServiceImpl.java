@@ -1,6 +1,6 @@
 package blossom.project.rpc.server.service.impl;
 
-import blossom.project.rpc.core.service.BlossomRpcService;
+import blossom.project.rpc.core.service.RpcService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,15 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class BlossomRpcServiceImpl implements BlossomRpcService {
+public class RpcServiceImpl implements RpcService {
+
+    /**
+     * 当前方法用于测试RPC请求
+     * @param info
+     * @return
+     */
     @Override
-    public String saveInfo(String info) {
+    public String testRpcRequest(String info) {
         log.info("the receive info is :{}",info);
 
         return "success response info :"+info;

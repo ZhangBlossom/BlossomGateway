@@ -4,7 +4,7 @@ import blossom.project.rpc.core.entity.RpcRequest;
 import blossom.project.rpc.core.proxy.spring.SpringBeanManager;
 import blossom.project.rpc.core.proxy.spring.SpringRpcProxy;
 import blossom.project.rpc.core.starter.NettyRpcServer;
-import blossom.project.rpc.server.service.impl.BlossomRpcServiceImpl;
+import blossom.project.rpc.server.service.impl.RpcServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +29,7 @@ public class ServerRpcBootstrap {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ServerRpcBootstrap.class, args);
         SpringBeanManager bean = context.getBean(SpringBeanManager.class);
-        BlossomRpcServiceImpl service = context.getBean(BlossomRpcServiceImpl.class);
+        RpcServiceImpl service = context.getBean(RpcServiceImpl.class);
         SpringRpcProxy rpcProxy = context.getBean(SpringRpcProxy.class);
         //检测一下是否能找到bean
         if (Objects.isNull(rpcProxy) ||
