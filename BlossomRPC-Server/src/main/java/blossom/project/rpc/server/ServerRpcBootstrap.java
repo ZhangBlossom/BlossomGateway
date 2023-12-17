@@ -42,8 +42,8 @@ public class ServerRpcBootstrap {
             RpcRequest request = new RpcRequest();
             //这里要解决只用用全类路径的问题需要引入注册中心
             //这里我简单的用Map模拟了一个注册中心
-            request.setClassName("blossom.project.rpc.core.service.BlossomRpcService");
-            request.setMethodName("saveInfo");
+            request.setClassName("blossom.project.rpc.core.service.RpcService");
+            request.setMethodName("testRpcRequest");
             request.setParams(new Object[]{"hello!!!JdkRpc!!!"});
             request.setParamsTypes(new Class<?>[]{String.class});
             Object data = rpcProxy.invoke(request);
