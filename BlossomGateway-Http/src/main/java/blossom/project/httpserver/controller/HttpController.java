@@ -35,6 +35,6 @@ public class HttpController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "pong gray =false !!!!";
+        return "this is application2";
     }
 }

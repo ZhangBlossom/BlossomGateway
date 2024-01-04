@@ -12,6 +12,7 @@ import blossom.project.core.helper.AsyncHttpHelper;
 import blossom.project.core.helper.ResponseHelper;
 import blossom.project.core.response.GatewayResponse;
 import com.netflix.hystrix.*;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.asynchttpclient.Request;
@@ -143,8 +144,16 @@ public class RouterFilter implements Filter {
             @Override
             protected Object getFallback() {
                 // 当熔断发生时，执行降级逻辑。
-                // 设置网关上下文的响应信息，通常包括一个降级响应。
-                gatewayContext.setResponse(hystrixConfig.get().getFallbackResponse());
+                // 检查是否是因为超时引发的熔断
+                if (isFailedExecution() && getFailedExecutionException() instanceof TimeoutException) {
+                    // 这里设置你自己的超时异常处理逻辑
+                    // 例如，返回一个自定义的错误响应
+                    gatewayContext.setResponse(GatewayResponse.buildGatewayResponse(
+                            ResponseCode.GATEWAY_FALLBACK));
+                } else {
+                    // 其他类型的熔断处理
+                    gatewayContext.setResponse(hystrixConfig.get().getFallbackResponse());
+                }
                 gatewayContext.written();
                 return null;
             }

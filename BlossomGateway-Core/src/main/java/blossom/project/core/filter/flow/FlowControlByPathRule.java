@@ -1,6 +1,8 @@
 package blossom.project.core.filter.flow;
 
 import blossom.project.common.config.Rule;
+import blossom.project.common.enums.ResponseCode;
+import blossom.project.common.exception.LimitedException;
 import blossom.project.core.util.JedisUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
@@ -95,7 +97,7 @@ public class FlowControlByPathRule implements GatewayFlowControlRule {
             flag = guavaCountLimiter.acquire((int) count);
         }
         if (!flag) {
-            throw new RuntimeException(LIMIT_MESSAGE);
+            throw new LimitedException(ResponseCode.FLOW_CONTROL_ERROR);
         }
     }
 }

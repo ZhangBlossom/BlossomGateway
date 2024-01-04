@@ -42,6 +42,7 @@ public class FlowControlFilter implements Filter {
                 if(flowControlConfig == null){
                     continue;
                 }
+                //http-server/ping
                 String path = ctx.getRequest().getPath();
                 if(flowControlConfig.getType().equalsIgnoreCase(FLOW_CTL_TYPE_PATH)
                         && path.equals(flowControlConfig.getValue())){
