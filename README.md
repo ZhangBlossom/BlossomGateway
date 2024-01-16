@@ -5,9 +5,9 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 
 WX：tobeacon4110 
 
-QQ：460219753
-
 项目博客：
+
+请选择掘金阅读
 
 CSDN：https://blog.csdn.net/Zhangsama1/article/details/134354438?spm=1001.2014.3001.5502
 
