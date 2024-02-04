@@ -8,11 +8,12 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fa887a8e-4cb6-450a-9626-34bc3597fd39)
 
 
-WX：qczjhczs0114
-
 添加微信，加入我的知识星球
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/f668c96d-3222-47e0-883c-2f88cf51d9af)
+
+![Uploading image.png…]()
+
 
 项目博客：
 
