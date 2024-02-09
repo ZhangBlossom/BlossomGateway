@@ -13,7 +13,8 @@ show一下工牌
 
 当前项目可以作为简历项目
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fa887a8e-4cb6-450a-9626-34bc3597fd39)
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/adae1381-e7a6-4199-8296-67663aa171e3)
+
 
 
 添加微信，加入我的知识星球
