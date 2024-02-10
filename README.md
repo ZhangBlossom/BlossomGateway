@@ -17,7 +17,9 @@ show一下工牌
 
 
 
-添加微信，加入我的知识星球
+添加微信，加入我的知识星球,目前已有近200人
+
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fbd12c89-ca55-4efc-b8b7-c6c0dd0061ac)
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/f668c96d-3222-47e0-883c-2f88cf51d9af)
 
