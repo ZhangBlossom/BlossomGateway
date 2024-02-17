@@ -23,7 +23,8 @@ show一下工牌
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/f668c96d-3222-47e0-883c-2f88cf51d9af)
 
-![QQ截图20240209121942](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/2cebccbb-145d-48c4-ae97-7635f1d2636b)
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/61c9cfb1-f6fb-4dc1-8d2d-e39ac7546470)
+
 
 
 
