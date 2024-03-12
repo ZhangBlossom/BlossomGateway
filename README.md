@@ -3,6 +3,11 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 
 项目实现多种过滤器，包含路由、负载均衡、鉴权、灰度发布等过滤器。
 
+目录如下：
+
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/df3b0ad6-6b81-4a03-844a-bda348c614ce)
+
+
 配置中心项目：https://github.com/ZhangBlossom/BlossomConfig
 
 RPC项目：https://github.com/ZhangBlossom/BlossomRPC
@@ -30,11 +35,19 @@ show一下我们的工牌
 
 如果有意向加入星球可以联系我们哦。目前星球已有200+人。
 
-星球内容会不断继续完善更新，目前星球内容已达62w字。希望能早日到达内容100w字！    
+星球内容会不断继续完善更新，目前星球内容已达66w字。希望能早日到达内容100w字！    
+
+如下是星球目录：
+
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/71c4a982-bd1e-4266-8104-5981c032bfb1)
+
+星球价格：
+
+一周19  三个月59  半年99  一年159  两年259  永久299
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fbd12c89-ca55-4efc-b8b7-c6c0dd0061ac)
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/f668c96d-3222-47e0-883c-2f88cf51d9af)
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/aa530be4-a00a-4598-a2a9-be6e2a4c11ee)
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/61c9cfb1-f6fb-4dc1-8d2d-e39ac7546470)
 
