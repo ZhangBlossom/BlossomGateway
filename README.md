@@ -41,9 +41,16 @@ show一下我们的工牌
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/71c4a982-bd1e-4266-8104-5981c032bfb1)
 
-星球价格：
+🌍价格：
 
 一周19  三个月59  半年99  一年159  两年259  永久299
+
+这里也非常感谢在我emo时候给我支持的👬
+
+知足常乐～
+
+<img width="605" alt="image" src="https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/3b87ca53-8637-4f2b-b94d-b1af5ca317d5">
+
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fbd12c89-ca55-4efc-b8b7-c6c0dd0061ac)
 
