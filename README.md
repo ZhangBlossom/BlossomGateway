@@ -1,3 +1,4 @@
+C端项目推荐：https://github.com/Towelove/Towelove
 
 BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为注册与配置中心。
 
