@@ -48,16 +48,17 @@ show一下我们的工牌
 
 一周29  三个月69  半年99  一年179  两年259  永久299
 
+内容并非尽善尽美，但是也绝对真诚，如果能帮上你那我很高兴。
+
 这里也非常感谢在我emo时候给我支持的👬
 
 知足常乐～
 
 <img width="605" alt="image" src="https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/3b87ca53-8637-4f2b-b94d-b1af5ca317d5">
 
-也很感谢那个在我emo时候剪了个让我脚趾扣地的朋友
+也很感谢那个在我emo时候剪了个视频的朋友
 
-<img width="1280" alt="image" src="https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/d6561554-826b-42da-9276-a81555c9d8c3">
-
+<img width="565" alt="image" src="https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fa9a5ede-49b3-4f43-abb6-eb9ec5f3b32b">
 
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fbd12c89-ca55-4efc-b8b7-c6c0dd0061ac)
