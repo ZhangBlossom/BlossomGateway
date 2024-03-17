@@ -54,6 +54,11 @@ show一下我们的工牌
 
 <img width="605" alt="image" src="https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/3b87ca53-8637-4f2b-b94d-b1af5ca317d5">
 
+也很感谢那个在我emo时候剪了个让我脚趾扣地的朋友
+
+<img width="1280" alt="image" src="https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/d6561554-826b-42da-9276-a81555c9d8c3">
+
+
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/fbd12c89-ca55-4efc-b8b7-c6c0dd0061ac)
 
