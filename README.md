@@ -1,5 +1,9 @@
 C端项目推荐：https://github.com/Towelove/Towelove
 
+配置中心项目： https://github.com/ZhangBlossom/BlossomConfig
+
+RPC项目：https://github.com/ZhangBlossom/BlossomRPC
+
 BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为注册与配置中心。
 
 项目实现多种过滤器，包含路由、负载均衡、鉴权、灰度发布等过滤器。
