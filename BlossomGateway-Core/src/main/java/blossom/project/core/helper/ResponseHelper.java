@@ -77,11 +77,15 @@ public class ResponseHelper {
 		}
 	}
 
+	private static final double DEFAULT_ALPHA = 0.2; // 默认的 alpha 值
+
 	// 发送成功的数据包数量
 	private static final AtomicInteger successCount = new AtomicInteger(0);
-
 	// 发送失败的数据包数量
 	private static final AtomicInteger failureCount = new AtomicInteger(0);
+
+	private static double lossRate = 0.0; // 初始丢包率
+	private static double alpha = DEFAULT_ALPHA; // 指数加权移动平均的平滑因子
 
 	/**
 	 * 写回响应信息方法
@@ -126,7 +130,7 @@ public class ResponseHelper {
 			context.completed();
 
 			// 计算丢包率
-			double lossRate = calculateLossRate();
+			updateLossRate();
 			log.info("当前丢包率为: {}", lossRate);
 		}
 		else if(context.isCompleted()){
@@ -136,18 +140,20 @@ public class ResponseHelper {
 	}
 
 	/**
-	 * 计算丢包率
+	 * 使用指数加权移动平均（Exponential Weighted Moving Average，EWMA）算法。
+	 * 这是一种在时间序列数据中广泛应用的算法，它对最近的观测值赋予更高的权重，
+	 * 并对较早的观测值赋予较低的权重。这样，就可以更准确地反映出丢包率的变化趋势，
+	 * 而不仅仅是简单地计算成功和失败的比例。
+	 *
+	 * 更新丢包率
 	 */
-	private static double calculateLossRate() {
+	private static void updateLossRate() {
 		int success = successCount.get();
 		int failure = failureCount.get();
 		int total = success + failure;
-		if (total == 0) {
-			// 避免除以0的情况
-			return 0.0;
-		} else {
-			return (double) failure / (double) total;
+		if (total != 0) {
+			double newLossRate = alpha * failure / total;
+			lossRate = alpha * newLossRate + (1 - alpha) * lossRate;
 		}
 	}
-	
 }
