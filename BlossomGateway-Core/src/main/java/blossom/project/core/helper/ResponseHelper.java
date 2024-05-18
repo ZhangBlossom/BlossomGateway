@@ -8,9 +8,11 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.handler.codec.http.*;
+import lombok.extern.slf4j.Slf4j;
 
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -20,9 +22,10 @@ import java.util.Objects;
  * @contact: WX:qczjhczs0114
  * @blog: https://blog.csdn.net/Zhangsama1
  * @github: https://github.com/ZhangBlossom
- * Test类
  * 响应的辅助类
  */
+
+@Slf4j
 public class ResponseHelper {
 
 	/**
@@ -73,7 +76,12 @@ public class ResponseHelper {
 			return httpResponse;
 		}
 	}
-	
+
+	// 发送成功的数据包数量
+	private static final AtomicInteger successCount = new AtomicInteger(0);
+
+	// 发送失败的数据包数量
+	private static final AtomicInteger failureCount = new AtomicInteger(0);
 
 	/**
 	 * 写回响应信息方法
@@ -88,20 +96,58 @@ public class ResponseHelper {
 			FullHttpResponse httpResponse = ResponseHelper.getHttpResponse(context, (GatewayResponse)context.getResponse());
 			if(!context.isKeepAlive()) {
 				context.getNettyCtx()
-					.writeAndFlush(httpResponse).addListener(ChannelFutureListener.CLOSE);
+					.writeAndFlush(httpResponse).addListener(ChannelFutureListener.CLOSE)
+						.addListener((ChannelFutureListener) future1 -> {
+					if (future1.isSuccess()) {
+						// 发送成功
+						successCount.incrementAndGet();
+					} else {
+						// 发送失败
+						failureCount.incrementAndGet();
+					}
+				});
+
 			} 
 			//	长连接：
 			else {
 				httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
-				context.getNettyCtx().writeAndFlush(httpResponse);
+				context.getNettyCtx().writeAndFlush(httpResponse).addListener((ChannelFutureListener) future1 -> {
+					if (future1.isSuccess()) {
+						// 发送成功
+						successCount.incrementAndGet();
+					} else {
+						// 发送失败
+						failureCount.incrementAndGet();
+					}
+				});
+
 			}
 			//	2:	设置写回结束状态为： COMPLETED
 			context.completed();
+
+			// 计算丢包率
+			double lossRate = calculateLossRate();
+			log.info("当前丢包率为: {}", lossRate);
 		}
 		else if(context.isCompleted()){
 			context.invokeCompletedCallBack();
 		}
 		
+	}
+
+	/**
+	 * 计算丢包率
+	 */
+	private static double calculateLossRate() {
+		int success = successCount.get();
+		int failure = failureCount.get();
+		int total = success + failure;
+		if (total == 0) {
+			// 避免除以0的情况
+			return 0.0;
+		} else {
+			return (double) failure / (double) total;
+		}
 	}
 	
 }
