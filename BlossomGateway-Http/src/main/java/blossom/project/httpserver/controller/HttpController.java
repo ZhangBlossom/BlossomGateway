@@ -35,6 +35,20 @@ public class HttpController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        //多服务启动的时候，这里改一下，就可以实现集群负载均衡的效果
         return "this is application2";
+    }
+
+    @ApiInvoker(path = "/http-server/ping2")
+    @GetMapping("/http-server/ping2")
+    public String ping2() {
+        log.info("{}", apiProperties);
+        try {
+            //Thread.sleep(10000000);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        //多服务启动的时候，这里改一下，就可以实现集群负载均衡的效果
+        return "this is ping2";
     }
 }

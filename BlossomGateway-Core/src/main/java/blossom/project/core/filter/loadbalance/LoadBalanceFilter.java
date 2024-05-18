@@ -72,8 +72,8 @@ public class LoadBalanceFilter implements Filter {
                 String filterId = filterConfig.getId();
                 if (LOAD_BALANCE_FILTER_ID.equals(filterId)) {
                     String config = filterConfig.getConfig();
-                    //默认选择随机负载均衡过滤器
-                    String strategy = LOAD_BALANCE_STRATEGY_RANDOM;
+                    //默认选择权重负载均衡过滤器
+                    String strategy = LOAD_BALANCE_STRATEGY_WEIGHT;
                     if (StringUtils.isNotEmpty(config)) {
                         Map<String, String> mapTypeMap = JSON.parseObject(config, Map.class);
                         strategy = mapTypeMap.getOrDefault(LOAD_BALANCE_KEY, strategy);
@@ -84,6 +84,9 @@ public class LoadBalanceFilter implements Filter {
                             break;
                         case LOAD_BALANCE_STRATEGY_ROUND_ROBIN:
                             loadBalanceRule = RoundRobinLoadBalanceRule.getInstance(configRule.getServiceId());
+                            break;
+                        case LOAD_BALANCE_STRATEGY_WEIGHT:
+                            loadBalanceRule = WeightLoadBalanceRule.getInstance(configRule.getServiceId());
                             break;
                         default:
                             log.warn("No loadBalance strategy for service:{}", strategy);

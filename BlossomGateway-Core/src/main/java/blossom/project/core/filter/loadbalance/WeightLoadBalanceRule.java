@@ -23,50 +23,61 @@ import static blossom.project.common.enums.ResponseCode.SERVICE_INSTANCE_NOT_FOU
  * @github: https://github.com/ZhangBlossom
  * @description:
  */
+
 @Slf4j
 public class WeightLoadBalanceRule implements LoadBalanceGatewayRule {
 
-
     private final String serviceId;
-
-    /**
-     * 服务列表
-     */
-    private Set<ServiceInstance> serviceInstanceSet;
 
     public WeightLoadBalanceRule(String serviceId) {
         this.serviceId = serviceId;
     }
 
-    private static ConcurrentHashMap<String, RandomLoadBalanceRule> serviceMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, WeightLoadBalanceRule>
+            serviceMap = new ConcurrentHashMap<>();
 
-    public static RandomLoadBalanceRule getInstance(String serviceId) {
-        RandomLoadBalanceRule loadBalanceRule = serviceMap.get(serviceId);
+    public static WeightLoadBalanceRule getInstance(String serviceId) {
+        WeightLoadBalanceRule loadBalanceRule = serviceMap.get(serviceId);
         if (loadBalanceRule == null) {
-            loadBalanceRule = new RandomLoadBalanceRule(serviceId);
+            loadBalanceRule = new WeightLoadBalanceRule(serviceId);
             serviceMap.put(serviceId, loadBalanceRule);
         }
         return loadBalanceRule;
     }
 
-
     @Override
     public ServiceInstance choose(GatewayContext ctx, boolean gray) {
         String serviceId = ctx.getUniqueId();
-        return choose(serviceId,gray);
+        return choose(serviceId, gray);
     }
 
     @Override
-    public ServiceInstance choose(String serviceId,boolean gray) {
+    public ServiceInstance choose(String serviceId, boolean gray) {
         Set<ServiceInstance> serviceInstanceSet =
-                DynamicConfigManager.getInstance().getServiceInstanceByUniqueId(serviceId,gray);
+                DynamicConfigManager.getInstance().getServiceInstanceByUniqueId(serviceId, gray);
         if (serviceInstanceSet.isEmpty()) {
-            log.warn("No instance available for:{}", serviceId);
+            log.warn("No instance available for: {}", serviceId);
             throw new NotFoundException(SERVICE_INSTANCE_NOT_FOUND);
         }
-        List<ServiceInstance> instances = new ArrayList<ServiceInstance>(serviceInstanceSet);
-        int index = ThreadLocalRandom.current().nextInt(instances.size());
-        ServiceInstance instance = (ServiceInstance) instances.get(index);
-        return instance;
+
+        // 计算总权重
+        int totalWeight = 0;
+        for (ServiceInstance instance : serviceInstanceSet) {
+            totalWeight += instance.getWeight();
+        }
+
+        // 随机选择一个权重值
+        int randomWeight = ThreadLocalRandom.current().nextInt(totalWeight);
+
+        // 根据权重选择实例
+        for (ServiceInstance instance : serviceInstanceSet) {
+            randomWeight -= instance.getWeight();
+            if (randomWeight < 0) {
+                return instance;
+            }
+        }
+
+        // 如果未能选择实例，则返回第一个实例
+        return serviceInstanceSet.iterator().next();
     }
 }
