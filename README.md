@@ -8,6 +8,13 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 
 项目实现多种过滤器，包含路由、负载均衡、鉴权、灰度发布等过滤器。
 
+新增一致性hash负载均衡过滤器。
+
+以及丢包率计算。
+
+![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/f138cd5f-cab1-40b4-90d3-d8e518845f2f)
+
+
 目录如下：
 
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/df3b0ad6-6b81-4a03-844a-bda348c614ce)
