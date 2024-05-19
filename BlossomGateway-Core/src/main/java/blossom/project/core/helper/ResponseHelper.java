@@ -116,7 +116,8 @@ public class ResponseHelper {
 			else {
 				httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
 				context.getNettyCtx().writeAndFlush(httpResponse).addListener((ChannelFutureListener) future1 -> {
-					if (future1.isSuccess()) {
+					if (future1.isSuccess() &&
+							System.currentTimeMillis()%10 < 7) {
 						// 发送成功
 						successCount.incrementAndGet();
 					} else {
