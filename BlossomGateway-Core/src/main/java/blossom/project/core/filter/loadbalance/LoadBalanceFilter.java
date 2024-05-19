@@ -4,6 +4,7 @@ import blossom.project.common.config.Rule;
 import blossom.project.common.config.ServiceInstance;
 import blossom.project.common.exception.NotFoundException;
 import blossom.project.core.context.GatewayContext;
+import blossom.project.core.factory.ConsistentHashLoadBalanceRuleFactory;
 import blossom.project.core.filter.Filter;
 import blossom.project.core.filter.FilterAspect;
 import blossom.project.core.request.GatewayRequest;
@@ -38,7 +39,7 @@ public class LoadBalanceFilter implements Filter {
         //从请求上下文中获取负载均衡策略
         LoadBalanceGatewayRule gatewayLoadBalanceRule = getLoadBalanceRule(ctx);
         //获取某一台服务实例
-        ServiceInstance serviceInstance = gatewayLoadBalanceRule.choose(serviceId, ctx.isGray());
+        ServiceInstance serviceInstance = gatewayLoadBalanceRule.choose(ctx, ctx.isGray());
         System.out.println("IP为" + serviceInstance.getIp() + ",端口号：" + serviceInstance.getPort());
         GatewayRequest request = ctx.getRequest();
         if (serviceInstance != null && request != null) {
@@ -87,6 +88,10 @@ public class LoadBalanceFilter implements Filter {
                             break;
                         case LOAD_BALANCE_STRATEGY_WEIGHT:
                             loadBalanceRule = WeightLoadBalanceRule.getInstance(configRule.getServiceId());
+                            break;
+                        case LOAD_BALANCE_STRATEGY_CONSISTENT_HASH:
+                            loadBalanceRule =
+                                    ConsistentHashLoadBalanceRule.getInstance(configRule.getServiceId());
                             break;
                         default:
                             log.warn("No loadBalance strategy for service:{}", strategy);

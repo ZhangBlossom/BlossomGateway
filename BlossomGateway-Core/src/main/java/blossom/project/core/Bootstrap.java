@@ -1,6 +1,5 @@
 package blossom.project.core;
 
-import blossom.project.common.config.DynamicConfigManager;
 import blossom.project.common.config.ServiceDefinition;
 import blossom.project.common.config.ServiceInstance;
 import blossom.project.common.utils.NetUtils;

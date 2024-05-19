@@ -21,6 +21,7 @@ public interface LoadBalanceGatewayRule {
      * @param gray
      * @return
      */
+    @Deprecated
     ServiceInstance choose(GatewayContext ctx,boolean gray);
 
     /**

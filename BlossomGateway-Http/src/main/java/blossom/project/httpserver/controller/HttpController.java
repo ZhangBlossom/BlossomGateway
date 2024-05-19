@@ -36,7 +36,7 @@ public class HttpController {
             throw new RuntimeException(e);
         }
         //多服务启动的时候，这里改一下，就可以实现集群负载均衡的效果
-        return "this is application2";
+        return "this is application1";
     }
 
     @ApiInvoker(path = "/http-server/ping2")
@@ -49,6 +49,6 @@ public class HttpController {
             throw new RuntimeException(e);
         }
         //多服务启动的时候，这里改一下，就可以实现集群负载均衡的效果
-        return "this is ping2";
+        return "this is ping1";
     }
 }

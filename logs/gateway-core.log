@@ -1,7 +1,7 @@
 2023-11-12 14:52:38.553 ERROR [ateway-queue--pool-6]             b.p.c.n.p.NettyCoreProcessor : process unkown error
 java.lang.NullPointerException: Cannot invoke "Object.hashCode()" because "key" is null
 	at java.util.concurrent.ConcurrentHashMap.get(ConcurrentHashMap.java:936) ~[?:?]
-	at blossom.project.common.config.DynamicConfigManager.getServiceDefinition(DynamicConfigManager.java:50) ~[classes/:?]
+	at blossom.project.core.DynamicConfigManager.getServiceDefinition(DynamicConfigManager.java:50) ~[classes/:?]
 	at blossom.project.core.helper.RequestHelper.doContext(RequestHelper.java:41) ~[classes/:?]
 	at blossom.project.core.netty.processor.NettyCoreProcessor.process(NettyCoreProcessor.java:49) [classes/:?]
 	at blossom.project.core.netty.processor.DisruptorNettyCoreProcessor$BatchEventListenerProcessor.onEvent(DisruptorNettyCoreProcessor.java:71) [classes/:?]

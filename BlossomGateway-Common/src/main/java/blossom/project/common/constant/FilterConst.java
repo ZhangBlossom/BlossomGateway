@@ -37,6 +37,7 @@ public interface FilterConst {
 
     String LOAD_BALANCE_STRATEGY_WEIGHT = "Weight";
 
+    String LOAD_BALANCE_STRATEGY_CONSISTENT_HASH = "ConsistentHash";
     String ROUTER_FILTER_ID = "router_filter";
     String ROUTER_FILTER_NAME = "router_filter";
     int ROUTER_FILTER_ORDER = Integer.MAX_VALUE;

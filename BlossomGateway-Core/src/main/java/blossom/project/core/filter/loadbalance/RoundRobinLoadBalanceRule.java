@@ -1,7 +1,7 @@
 package blossom.project.core.filter.loadbalance;
 
 
-import blossom.project.common.config.DynamicConfigManager;
+import blossom.project.core.DynamicConfigManager;
 import blossom.project.common.config.ServiceInstance;
 import blossom.project.common.exception.NotFoundException;
 import blossom.project.core.context.GatewayContext;

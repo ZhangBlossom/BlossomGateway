@@ -1,13 +1,11 @@
 package blossom.project.core.filter.loadbalance;
 
-import blossom.project.common.config.DynamicConfigManager;
+import blossom.project.core.DynamicConfigManager;
 import blossom.project.common.config.ServiceInstance;
 import blossom.project.common.exception.NotFoundException;
 import blossom.project.core.context.GatewayContext;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;

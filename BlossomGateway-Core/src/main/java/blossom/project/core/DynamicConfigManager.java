@@ -1,13 +1,14 @@
-package blossom.project.common.config;
+package blossom.project.core;
 
-import blossom.project.common.exception.NotFoundException;
+import blossom.project.common.config.Rule;
+import blossom.project.common.config.ServiceDefinition;
+import blossom.project.common.config.ServiceInstance;
+import blossom.project.core.filter.loadbalance.ConsistentHashLoadBalanceRule;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
-import static blossom.project.common.enums.ResponseCode.SERVICE_INSTANCE_NOT_FOUND;
 
 /**
  * 动态服务缓存配置管理类  用于缓存从配置中心拉取下来的配置
@@ -28,65 +29,13 @@ public class DynamicConfigManager {
 	//路径以及规则集合
 	private ConcurrentHashMap<String /* 路径 */ , Rule>  pathRuleMap = new ConcurrentHashMap<>();
 	private ConcurrentHashMap<String /* 服务名 */ , List<Rule>>  serviceRuleMap = new ConcurrentHashMap<>();
-
-
-
-	// 服务器列表
-	private List<String> serverList = new ArrayList<>();
-
-	private static final int VIRTUAL_NODE_COUNT = 100; // 虚拟节点数量
-
-	// 一致性哈希环
-	private TreeMap<Integer, ServiceInstance> hashRing = new TreeMap<>();
-
-	// 添加服务实例
-	public void addServiceInstance(ServiceInstance serviceInstance) {
-		// 添加虚拟节点
-		for (int i = 0; i < VIRTUAL_NODE_COUNT; i++) {
-			String virtualNode = serviceInstance.getServiceInstanceId() + "&&VN" + i;
-			int hash = getHash(virtualNode);
-			hashRing.put(hash, serviceInstance);
-		}
-		updateServerList();
-	}
-
-	// 获取哈希值
-	private int getHash(String key) {
-		final int p = 16777619;
-		int hash = (int) 2166136261L;
-		for (int i = 0; i < key.length(); i++)
-			hash = (hash ^ key.charAt(i)) * p;
-		hash += hash << 13;
-		hash ^= hash >> 7;
-		hash += hash << 3;
-		hash ^= hash >> 17;
-		hash += hash << 5;
-		return Math.abs(hash);
-	}
-
-	// 更新服务器列表
-	private void updateServerList() {
-		serverList = new ArrayList<>(new HashSet<>(hashRing.values()));
-	}
-
-	// 选择服务实例
-	public ServiceInstance chooseServiceInstance(String uniqueId) {
-		int hash = getHash(uniqueId);
-		SortedMap<Integer, ServiceInstance> tailMap = hashRing.tailMap(hash);
-		ServiceInstance selectedInstance = tailMap.isEmpty() ? hashRing.firstEntry().getValue() : tailMap.firstEntry().getValue();
-		if (selectedInstance == null) {
-			throw new NotFoundException(SERVICE_INSTANCE_NOT_FOUND);
-		}
-		return selectedInstance;
-	}
-
-
-	private DynamicConfigManager() {
+		private DynamicConfigManager() {
 	}
 
 	private static class SingletonHolder {
 		private static final DynamicConfigManager INSTANCE = new DynamicConfigManager();
 	}
+
 
 
 	/***************** 	对服务定义缓存进行操作的系列方法 	***************/
