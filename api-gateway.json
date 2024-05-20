@@ -12,7 +12,7 @@
       "filterConfigs": [
         {
           "config": {
-            "load_balance": "Random"
+            "load_balance": "RoundRobin"
           },
           "id": "load_balance_filter"
         },
@@ -51,42 +51,48 @@
         "times": 3
       },
       "serviceId": "backend-http-server",
-      // "flowControlConfigs":[
-
-        //     {
-                 //     "type":"path",
-                 //     "value":"/http-server/ping",
-                 //     "model":"distributed",
-          //     "config":{
-                            //         "duration":1,
-                            //         "permits":1000
-                            //     }}
-        // ],
-      // "hystrixConfigs":[{
-                             //     "path":"/http-server/ping",
-                             //     "timeoutInMilliseconds":5000,
-                             //     "threadCoreSize":2,
-                             //     "fallbackResponse":"熔断超时"
-                             // }],
+      "flowControlConfigs":[
+        {
+          "type":"path",
+          "value":"/http-server/ping",
+          "model":"distributed",
+          "config":{
+            "duration":1,
+            "permits":1
+          }
+        }
+      ],
+      "hystrixConfigs":[{
+        "path":"/http-server/ping",
+        "timeoutInMilliseconds":5000,
+        "threadCoreSize":2,
+        "fallbackResponse":"熔断超时"
+      }],
       "filterConfigs": [
         {
           "config": {
-            "load_balance": "RoundRobin"
+            "load_balance": "ConsistentHash"
+            // "load_balance": "RoundRobin"
+            // "load_balance": "Random"
+            // "load_balance": "Weight"
           },
           "id": "load_balance_filter"
         }
-        // {
-          //     "id": "auth_filter"
-                         // },
-        // {
-             //     "id":"flow_ctl_filter"
-             // }
-        // {
-          //     "id": "mock_filter",
-          //     "config":{
-                            //         "GET /http-server/ping":"this is Mock response"
-                            //     }
-                            // }
+      ,
+        {
+          "id": "auth_filter"
+        }
+      ,
+        {
+          "id":"flow_ctl_filter"
+        }
+      ,
+        {
+          "id": "mock_filter",
+          "config":{
+            "GET /http-server/ping":"this is Mock response can you see1?"
+          }
+        }
       ]
     },
 

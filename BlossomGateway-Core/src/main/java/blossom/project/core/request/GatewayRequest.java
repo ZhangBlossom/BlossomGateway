@@ -203,6 +203,9 @@ public class GatewayRequest implements IGatewayRequest{
         if(cookieMap == null){
             cookieMap = new HashMap<String,io.netty.handler.codec.http.cookie.Cookie>();
             String cookieStr = getHeaders().get(HttpHeaderNames.COOKIE);
+            if (StringUtils.isBlank(cookieStr)){
+                return null;
+            }
             Set<io.netty.handler.codec.http.cookie.Cookie> cookies = ServerCookieDecoder.STRICT.decode(cookieStr);
             for(io.netty.handler.codec.http.cookie.Cookie cookie: cookies){
                 cookieMap.put(name,cookie);

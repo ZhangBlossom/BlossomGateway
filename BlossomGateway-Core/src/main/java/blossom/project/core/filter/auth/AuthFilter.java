@@ -11,6 +11,8 @@ import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Optional;
+
 import static blossom.project.common.constant.FilterConst.*;
 
 /**
@@ -45,8 +47,16 @@ public class AuthFilter implements Filter {
         if (ctx.getRule().getFilterConfig(AUTH_FILTER_ID) == null) {
             return;
         }
+        //使用auth过滤器，并且没有传递token的时候，有npe问题
+        //String token = ctx.getRequest().getCookie(COOKIE_NAME).value();
 
-        String token = ctx.getRequest().getCookie(COOKIE_NAME).value();
+        // 获取cookie值，如果为null则返回Optional.empty()
+        Optional<String> cookieValue = Optional
+                .ofNullable(ctx.getRequest().getCookie(COOKIE_NAME))
+                .map(cookie -> cookie.value());
+
+        // 检查是否有值，如果有则返回值，否则返回null
+        String token = cookieValue.orElse(null);
         if (StringUtils.isBlank(token)) {
             throw new ResponseException(ResponseCode.UNAUTHORIZED);
         }

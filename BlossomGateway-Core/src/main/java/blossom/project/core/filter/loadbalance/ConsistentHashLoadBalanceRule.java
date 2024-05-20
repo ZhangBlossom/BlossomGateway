@@ -49,7 +49,8 @@ public class ConsistentHashLoadBalanceRule implements LoadBalanceGatewayRule {
 
     @Override
     public ServiceInstance choose(GatewayContext ctx, boolean gray) {
-        String path = ctx.getRequest().getPath(); // 使用请求路径作为一致性哈希的键
+        // 使用请求路径作为一致性哈希的键
+        String path = ctx.getRequest().getPath();
         String uniqueId = ctx.getUniqueId();
         Set<ServiceInstance> serviceInstanceSet =
                 DynamicConfigManager.getInstance().getServiceInstanceByUniqueId(uniqueId, gray);
