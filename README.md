@@ -51,7 +51,8 @@ show一下我们的工牌
 
 如下是星球目录：
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/71c4a982-bd1e-4266-8104-5981c032bfb1)
+![3c9f27c4f29be5c2be0ffd5079f829d](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/7fcb03e4-714d-4cc6-b522-e47c4256901f)
+
 
 我是谁？
 
@@ -65,7 +66,7 @@ show一下我们的工牌
 
 这些笔记能帮助没有面试经验的人快速的了解如何流水线式的处理一些中等难度的面试。
 
-🌍价格仅需要：80元
+🌍价格仅需要：100元
 
 如果你只需要网关的资料，那么10元即可。
 
