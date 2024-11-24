@@ -20,6 +20,9 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 
 目录如下：
 
+![image](https://github.com/user-attachments/assets/c2ffdaee-1e77-48bb-9d24-592fa0844f2c)
+
+
 ![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/df3b0ad6-6b81-4a03-844a-bda348c614ce)
 
 
@@ -68,10 +71,6 @@ show一下我们的工牌
 我简历上的项目，我应付（bushi）面试的一些常用套路等。
 
 这些笔记能帮助没有面试经验的人快速的了解如何流水线式的处理一些中等难度的面试。
-
-🌍价格仅需要：100元
-
-哼哼，写这么多字总得请我喝个🍵吧（不过我可不是奶茶爱好者）
 
 内容并非尽善尽美，但是也绝对真诚，如果能帮上你那我很高兴
 
