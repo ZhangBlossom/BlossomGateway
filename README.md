@@ -20,10 +20,51 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 
 目录如下：
 
-![image](https://github.com/user-attachments/assets/c2ffdaee-1e77-48bb-9d24-592fa0844f2c)
+<img width="1137" alt="image" src="https://github.com/user-attachments/assets/48eb11de-9eb1-4967-aedc-540190a3a20f">
+
+<img width="1182" alt="image" src="https://github.com/user-attachments/assets/39ea1c15-4543-4735-be86-62a79c8dd74f">
+
+<img width="1157" alt="image" src="https://github.com/user-attachments/assets/603a681e-95e2-4548-96db-0bef9515f0d1">
+
+<img width="1109" alt="image" src="https://github.com/user-attachments/assets/a2626c06-e3b0-4fd5-bad3-4c49fa17402d">
+
+<img width="1121" alt="image" src="https://github.com/user-attachments/assets/618e9752-cbd2-418f-9453-6ba9dcc15d5b">
+
+<img width="1146" alt="image" src="https://github.com/user-attachments/assets/a4f4943d-fdc6-48ed-ba12-2cfe63cb2ed0">
+
+<img width="1160" alt="image" src="https://github.com/user-attachments/assets/288fdaed-64d2-4fb8-85fa-35498f52a7da">
+
+<img width="1146" alt="image" src="https://github.com/user-attachments/assets/e242336c-6296-4966-921d-ba295c5d69cb">
+
+<img width="1108" alt="image" src="https://github.com/user-attachments/assets/420792af-26a1-402e-93e6-a63a746e7cad">
+
+<img width="1106" alt="image" src="https://github.com/user-attachments/assets/aaad3e1d-a2b0-4523-bbf2-7856f4ec6901">
+
+<img width="1065" alt="image" src="https://github.com/user-attachments/assets/4eb0e923-fe85-486d-88b6-b27a527ddbf4">
+
+<img width="1106" alt="image" src="https://github.com/user-attachments/assets/4424b108-d472-4f41-8d9c-f212847a617c">
+
+<img width="1129" alt="image" src="https://github.com/user-attachments/assets/145a5901-7b91-4a18-a1a2-2026b23a3ff0">
+
+<img width="1149" alt="image" src="https://github.com/user-attachments/assets/acbee94f-ed01-4374-bd5f-e7b181b14f5b">
+
+<img width="1128" alt="image" src="https://github.com/user-attachments/assets/caf89e91-42f7-43c4-b3c1-76b465e603bd">
+
+<img width="1096" alt="image" src="https://github.com/user-attachments/assets/0e7205d3-91a7-49c6-8a9d-172824d36794">
+
+<img width="1160" alt="image" src="https://github.com/user-attachments/assets/c1d53b37-c81f-41d6-adb6-22e44e19d0d5">
+
+<img width="1057" alt="image" src="https://github.com/user-attachments/assets/0b2d018d-fb3d-4c2f-9cc0-2611d1b8624a">
 
 
-![image](https://github.com/ZhangBlossom/BlossomGateway/assets/110703773/df3b0ad6-6b81-4a03-844a-bda348c614ce)
+
+
+
+
+
+
+
+
 
 
 配置中心项目：https://github.com/ZhangBlossom/BlossomConfig
