@@ -20,6 +20,9 @@ BlossomGateway自研网关。基于Netty与原生Java实现，使用Nacos作为�
 
 目录如下：
 
+<img width="1423" alt="image" src="https://github.com/user-attachments/assets/bf792774-d2b1-429e-b984-aef803b2ce55">
+
+
 <img width="1137" alt="image" src="https://github.com/user-attachments/assets/48eb11de-9eb1-4967-aedc-540190a3a20f">
 
 <img width="1182" alt="image" src="https://github.com/user-attachments/assets/39ea1c15-4543-4735-be86-62a79c8dd74f">
